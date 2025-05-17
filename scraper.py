@@ -131,3 +131,7 @@ if __name__ == "__main__":
     scraper.scrape_rumi()
     scraper.scrape_tao()
     # Add other scraping methods as needed
+
+import os
+max_quotes = int(os.getenv('MAX_QUOTES', 50)) 
+request_delay = float(os.getenv('REQUEST_DELAY', 3))
