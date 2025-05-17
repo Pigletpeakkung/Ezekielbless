@@ -1,0 +1,250 @@
+:root {
+    --bg: #ffffff;
+    --text: #2c3e50;
+    --primary: #3498db;
+    --secondary: #2ecc71;
+    --accent: #e74c3c;
+    --glow: rgba(52, 152, 219, 0.3);
+    --radius: 12px;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --rumi: #8e44ad;
+    --watts: #e67e22;
+    --lawofone: #1abc9c;
+    --seth: #9b59b6;
+    --cwg: #3498db;
+    --buddhist: #f1c40f;
+    --tao: #2ecc71;
+}
+
+[data-theme="dark"] {
+    --bg: #1a1a1a;
+    --text: #ecf0f1;
+    --primary: #2980b9;
+    --secondary: #27ae60;
+    --accent: #c0392b;
+    --glow: rgba(46, 204, 113, 0.3);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background 0.3s, color 0.3s;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+}
+
+.sacred-cross {
+    width: 100px;
+    height: 100px;
+    background: var(--bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    position: relative;
+    cursor: pointer;
+    margin: 2rem auto;
+    border: none;
+    padding: 0;
+    z-index: 3;
+}
+
+.sacred-cross:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+
+.sacred-cross.loading {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.sacred-cross.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--accent);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cross-bar {
+    position: absolute;
+    background: var(--primary);
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.vertical {
+    width: 8px;
+    height: 60px;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+}
+
+.horizontal {
+    width: 60px;
+    height: 8px;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.wisdom-display {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin: 2rem 0;
+    min-height: 200px;
+    position: relative;
+}
+
+.quote {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    opacity: 0;
+}
+
+.source {
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.prompt {
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0;
+    margin-top: 1rem;
+    border-left: 4px solid var(--secondary);
+    padding-left: 1rem;
+}
+
+.error-message {
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    display: none;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: var(--radius);
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+button:focus {
+    outline: 2px solid var(--secondary);
+    outline-offset: 2px;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.tradition-indicator {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    color: white;
+    box-shadow: var(--shadow);
+    z-index: 3;
+}
+
+.sacred-canvas {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.glow-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--glow);
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Tradition-specific colors */
+.christian { background: var(--primary); }
+.islamic { background: #27ae60; }
+.hindu { background: #e74c3c; }
+.buddhist { background: var(--buddhist); color: #000; }
+.taoist { background: var(--tao); }
+.rumi { background: var(--rumi); }
+.watts { background: var(--watts); }
+.seth { background: var(--seth); }
+.cwg { background: var(--cwg); }
+.lawofone { background: var(--lawofone); }
+
+/* Animation keyframes */
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 10px rgba(46, 204, 113, 0); }
+    50% { box-shadow: 0 0 20px rgba(46, 204, 113, 0.5); }
+    100% { box-shadow: 0 0 10px rgba(46, 204, 113, 0); }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .sacred-cross {
+        width: 80px;
+        height: 80px;
+    }
+}
