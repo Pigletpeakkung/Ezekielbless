@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "source": "conversations-with-god",
+    "count": 3,
+    "last_updated": "2023-11-15",
+    "terms": "Fair use excerpts"
+  },
+  "quotes": [
+    {
+      "text": "Your life is not a lesson, but a grand demonstration...",
+      "source": "Book 1, Chapter 7",
+      "page": 45,
+      "isbn": "978-0-399-14278-5"
+    },
+    {
+      "text": "Relationship is the laboratory of the soul...",
+      "source": "Book 2, Chapter 11",
+      "page": 112,
+      "isbn": "978-0-399-14279-2"
+    },
+    {
+      "text": "Fear is the opposite of love...",
+      "source": "Book 3, Chapter 5",
+      "page": 89,
+      "isbn": "978-0-399-14280-8"
+    }
+  ]
+}
