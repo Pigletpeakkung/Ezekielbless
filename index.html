@@ -3,33 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Receive divine wisdom from multiple spiritual traditions with interactive sacred cross">
+    <meta name="keywords" content="wisdom, quotes, spiritual, multi-faith, inspiration">
     <title>Universal Wisdom Cross</title>
-    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- CSS with CDN and fallback -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Pigletpeakkung/Ezekielbless@main/css/styles.css">
+    <noscript>
+        <link rel="stylesheet" href="css/styles.css">
+    </noscript>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
 </head>
 <body>
-    <div class="glow-overlay" id="glowOverlay"></div>
-    <div class="container">
+    <div class="glow-overlay" id="glowOverlay" aria-hidden="true"></div>
+    
+    <main class="container">
         <button class="sacred-cross" id="wisdomCross" aria-label="Fetch wisdom">
-            <div class="cross-bar vertical"></div>
-            <div class="cross-bar horizontal"></div>
+            <span class="sr-only">Sacred Cross Button</span>
+            <div class="cross-bar vertical" aria-hidden="true"></div>
+            <div class="cross-bar horizontal" aria-hidden="true"></div>
         </button>
         
-        <div class="wisdom-display" id="wisdomDisplay">
-            <p class="quote" id="quoteText"></p>
-            <p class="source" id="quoteSource"></p>
+        <section class="wisdom-display" id="wisdomDisplay" aria-live="polite">
+            <blockquote class="quote" id="quoteText"></blockquote>
+            <cite class="source" id="quoteSource"></cite>
             <p class="prompt" id="promptText"></p>
-            <p class="error-message" id="errorMessage"></p>
-        </div>
+            <p class="error-message" id="errorMessage" role="alert"></p>
+        </section>
 
-        <div class="controls">
-            <button id="dailyWisdom">📅 Daily Wisdom</button>
-            <button id="themeToggle">🌓 Toggle Theme</button>
-            <button id="speakQuote" disabled>🔊 Speak Quote</button>
-            <button id="changeTradition">🔄 Change Tradition</button>
-        </div>
-    </div>
+        <nav class="controls" aria-label="Application controls">
+            <button id="dailyWisdom" aria-label="Get daily wisdom">
+                <span aria-hidden="true">📅</span> <span class="btn-text">Daily Wisdom</span>
+            </button>
+            <button id="themeToggle" aria-label="Toggle dark mode">
+                <span aria-hidden="true">🌓</span> <span class="btn-text">Toggle Theme</span>
+            </button>
+            <button id="speakQuote" disabled aria-label="Speak current quote">
+                <span aria-hidden="true">🔊</span> <span class="btn-text">Speak Quote</span>
+            </button>
+            <button id="changeTradition" aria-label="Change spiritual tradition">
+                <span aria-hidden="true">🔄</span> <span class="btn-text">Change Tradition</span>
+            </button>
+        </nav>
+    </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- GSAP with fallback -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" 
+            integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" 
+            crossorigin="anonymous">
+    </script>
+    <script>
+        window.gsap || document.write('<script src="js/gsap.min.js"><\/script>');
+    </script>
+
+    <!-- Local scripts -->
     <script src="js/sacred-geometry.js"></script>
     <script src="js/tts.js"></script>
     <script src="js/main.js"></script>
