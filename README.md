@@ -1,271 +1,103 @@
-Here are the complete file contents for your **Sacred Wisdom Cross** project:
 
----
+```markdown
+# 🌿 Universal Wisdom Cross
 
-### **1. `index.html` (Main Webpage)**
-```html
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sacred Wisdom Cross</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <style>
-        /* [PASTE FULL CSS FROM EARLIER IMPLEMENTATION] */
-    </style>
-</head>
-<body>
-    <div class="glow-overlay" id="glowOverlay"></div>
-    <div class="container">
-        <!-- [PASTE HTML STRUCTURE FROM EARLIER] -->
-    </div>
+[![GitHub Pages](https://img.shields.io/badge/Live-Demo-brightgreen)](https://pigletpeakkung.github.io/Ezekielbless/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-    <script>
-        // [PASTE FULL JAVASCRIPT FROM EARLIER IMPLEMENTATION]
-        // Update API endpoints to use your Cloudflare Worker:
-        const sacredSources = {
-            traditions: [
-                { 
-                    name: 'Christian', 
-                    api: 'https://your-worker.your-username.workers.dev/proxy/christian/random',
-                    parser: data => ({ text: data.text, source: data.reference })
-                },
-                // ... other traditions with updated endpoints
-            ]
-        };
-    </script>
-</body>
-</html>
-```
+An interactive multi-faith wisdom tool featuring quotes from:
+- Christianity • Islam • Hinduism  
+- Buddhism • Taoism • Rumi  
+- Alan Watts • Conversations with God  
+- Seth Speaks • Law of One (Ra Material)
 
----
+![Wisdom Cross Screenshot](preview.png)
 
-### **2. `scraper.py` (Python Web Scraper)**
-```python
-import requests, json, time, os
-from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
+## ✨ Features
 
-class WisdomScraper:
-    def __init__(self):
-        self.ua = UserAgent()
-        self.headers = {'User-Agent': self.ua.random}
-        self.quotes_dir = "quotes"
-        os.makedirs(self.quotes_dir, exist_ok=True)
+- **Sacred Geometry Animations**  
+  Tradition-specific visual effects (Flower of Life, Dharma Wheel, etc.)
+  
+- **Text-to-Speech**  
+  Hear wisdom quotes spoken aloud (browser-supported)
 
-    def scrape_rumi(self):
-        print("Scraping Rumi quotes...")
-        try:
-            url = "https://www.goodreads.com/author/quotes/875661.Rumi"
-            response = requests.get(url, headers=self.headers)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            
-            quotes = []
-            for item in soup.select('.quoteText')[:50]:
-                text = item.get_text(strip=True).split('―')[0].strip('“”')
-                quotes.append({
-                    "text": text,
-                    "source": "Jalaluddin Rumi",
-                    "url": url
-                })
-            
-            self.save_quotes(quotes, "rumi.json")
-        except Exception as e:
-            print(f"Error scraping Rumi: {e}")
+- **Daily Wisdom Cycle**  
+  Automatically rotates through traditions
 
-    def save_quotes(self, quotes, filename):
-        path = f"{self.quotes_dir}/{filename}"
-        with open(path, 'w') as f:
-            json.dump({
-                "meta": {
-                    "source": filename.replace('.json',''),
-                    "count": len(quotes),
-                    "last_updated": time.strftime("%Y-%m-%d")
-                },
-                "quotes": quotes
-            }, f, indent=2)
-        print(f"Saved {len(quotes)} quotes to {path}")
+- **Dark/Light Mode**  
+  Eye-friendly theme switching
 
-if __name__ == "__main__":
-    scraper = WisdomScraper()
-    scraper.scrape_rumi()
-    # Add other scraping methods here
-```
+- **Cloudflare-Powered API**  
+  CORS-protected quote fetching
 
----
+## 🛠️ Setup
 
-### **3. `worker.js` (Cloudflare Worker)**
-```javascript
-addEventListener('fetch', event => {
-    event.respondWith(handleRequest(event.request))
-})
-
-const API_SOURCES = {
-    christian: 'https://bible-api.com/',
-    rumi: 'https://api.rumi-quotes.com/',
-    watts: 'https://alanwattsapi.org/'
-}
-
-async function handleRequest(request) {
-    const url = new URL(request.url)
-    const path = url.pathname.replace('/proxy/', '').split('/')
-    const [service, ...endpoint] = path
-
-    // Rate limiting
-    const clientIP = request.headers.get('cf-connecting-ip')
-    const cacheKey = `rate_limit_${clientIP}`
-    const limit = await KV_NAMESPACE.get(cacheKey) || 0
-    if (limit > 100) return new Response('Rate limit exceeded', { status: 429 })
-
-    // Proxy request
-    const target = `${API_SOURCES[service]}${endpoint.join('/')}`
-    const response = await fetch(target, {
-        headers: {
-            'User-Agent': 'SacredWisdomCross/1.0',
-            'Accept': 'application/json'
-        }
-    })
-
-    // Update rate limit
-    await KV_NAMESPACE.put(cacheKey, (parseInt(limit)+1, { expirationTtl: 3600 })
-
-    return new Response(response.body, {
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Cache-Control': 'public, max-age=3600'
-        }
-    })
-}
-```
-
----
-
-### **4. `README.md` (Documentation)**
-````markdown
-# Sacred Wisdom Cross
-
-![Preview](preview.png)
-
-A multi-faith inspirational tool featuring:
-
-- 8+ spiritual traditions
-- Dynamic animations
-- Text-to-speech
-- Daily wisdom
-
-## Setup
-
-1. Clone repo:
+### Local Development
 ```bash
-git clone https://github.com/your-username/sacred-wisdom-cross.git
+git clone https://github.com/Pigletpeakkung/Ezekielbless.git
+cd Ezekielbless
+python -m http.server 8000
+```
+Open `http://localhost:8000`
+
+### Requirements
+- Python 3.10+ (for scraper)
+- Node.js 20+ (for Cloudflare Worker)
+
+## 📂 File Structure
+```
+Ezekielbless/
+├── index.html            # Main application
+├── css/
+│   └── styles.css        # All styles
+├── js/
+│   ├── main.js           # Core logic
+│   ├── sacred-geometry.js # Animations
+│   └── tts.js            # Speech synthesis
+├── quotes/               # Quote database
+├── scraper.py            # Web scraping tool
+└── worker.js             # Cloudflare Worker
 ```
 
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+## 🌐 Deployment
+1. **GitHub Pages**  
+   - Automatic via `main` branch
 
-3. Run scraper:
-```bash
-python scraper.py
-```
+2. **Cloudflare Worker**  
+   ```bash
+   npm install -g wrangler
+   wrangler publish
+   ```
 
-## Deployment
-- GitHub Pages: Automatic via `main` branch
-- Cloudflare Worker: Deploy with `wrangler publish`
-````
+## 📜 Ethical Usage
+For copyrighted materials (CwG, Seth, Law of One):
+- Only includes short excerpts
+- Contains full attribution
+- Recommends purchasing original books
+
+## 🤝 Contributing
+1. Fork the repository
+2. Add new quotes to `/quotes`
+3. Submit a PR with:
+   - Source attribution
+   - ISBN/page references
+
+## 📄 License
+MIT © [Your Name]
 
 ---
-
-### **5. `.gitignore`**
-```gitignore
-# Python
-venv/
-__pycache__/
-*.pyc
-
-# Environment
-.env
-secrets.json
-
-# Data
-/quotes/local_*.json
 ```
 
----
+### Key Sections Included:
+1. **Live Demo Badge** - Links to GitHub Pages
+2. **Visual Preview** - Add a `preview.png` screenshot
+3. **Setup Instructions** - Both local and cloud deployment
+4. **Ethical Guidelines** - For copyrighted materials
+5. **File Structure** - Clear directory overview
+6. **License Info** - MIT license recommended
 
-### **6. Example Quote File (`quotes/rumi.json`)**
-```json
-{
-  "meta": {
-    "source": "rumi",
-    "count": 50,
-    "last_updated": "2023-11-15"
-  },
-  "quotes": [
-    {
-      "text": "You are not a drop in the ocean. You are the entire ocean in a drop.",
-      "source": "Rumi",
-      "url": "https://www.goodreads.com/author/quotes/875661.Rumi"
-    },
-    {
-      "text": "What you seek is seeking you.",
-      "source": "Rumi",
-      "url": "https://www.rumi.org.uk"
-    }
-  ]
-}
-```
+To add a screenshot:
+1. Take a screenshot of your project
+2. Save as `preview.png` in root
+3. Update the markdown image link if needed
 
----
-
-### **7. GitHub Actions (`.github/workflows/update-wisdom.yml`)**
-```yaml
-name: Update Wisdom Database
-
-on:
-  schedule:
-    - cron: '0 0 * * 0' # Weekly updates
-  workflow_dispatch:
-
-jobs:
-  update:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-      - run: pip install -r requirements.txt
-      - run: python scraper.py
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: 'Auto-update wisdom quotes'
-```
-
----
-
-### **How to Use:**
-1. Save each file with the exact names shown
-2. Run these commands:
-```bash
-# First-time setup
-python -m venv venv
-source venv/bin/activate  # Windows: .\venv\Scripts\activate
-pip install requests beautifulsoup4 fake-useragent
-
-# Generate initial quotes
-python scraper.py
-
-# Deploy worker (after installing wrangler)
-wrangler publish
-```
-
-The system will now:
-- Auto-harvest quotes weekly
-- Host the frontend on GitHub Pages
-- Handle CORS via Cloudflare Worker
-- Preserve manual quotes in `/quotes/local_*.json`
-
-Would you like me to provide the content for any other specific files?
