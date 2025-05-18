@@ -1,19 +1,25 @@
 :root {
+    /* Color Scheme */
     --bg: #ffffff;
     --text: #2c3e50;
     --primary: #3498db;
-    --secondary: #2ecc71;
+    --secondary: #27ae60;
     --accent: #e74c3c;
     --glow: rgba(52, 152, 219, 0.3);
     --radius: 12px;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+    /* Tradition Colors */
+    --christian: #3498db;
+    --islamic: #27ae60;
+    --hindu: #e74c3c;
+    --buddhist: #f1c40f;
+    --taoist: #2ecc71;
     --rumi: #8e44ad;
     --watts: #e67e22;
-    --lawofone: #1abc9c;
     --seth: #9b59b6;
     --cwg: #3498db;
-    --buddhist: #f1c40f;
-    --tao: #2ecc71;
+    --lawofone: #1abc9c;
 }
 
 [data-theme="dark"] {
@@ -25,11 +31,12 @@
     --glow: rgba(46, 204, 113, 0.3);
 }
 
+/* Base Styles */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    transition: background 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 body {
@@ -42,8 +49,23 @@ body {
     padding: 2rem;
     position: relative;
     overflow: hidden;
+    line-height: 1.6;
 }
 
+/* Accessibility Helpers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Layout Components */
 .container {
     max-width: 800px;
     width: 100%;
@@ -63,30 +85,6 @@ body {
     border: none;
     padding: 0;
     z-index: 3;
-}
-
-.sacred-cross:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: 4px;
-}
-
-.sacred-cross.loading {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.sacred-cross.loading::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--accent);
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .cross-bar {
@@ -112,6 +110,7 @@ body {
     transform: translateY(-50%);
 }
 
+/* Wisdom Display */
 .wisdom-display {
     background: rgba(0, 0, 0, 0.05);
     border-radius: var(--radius);
@@ -131,6 +130,7 @@ body {
 .source {
     font-style: italic;
     margin-bottom: 1rem;
+    color: var(--accent);
 }
 
 .prompt {
@@ -149,6 +149,7 @@ body {
     display: none;
 }
 
+/* Controls */
 .controls {
     display: flex;
     gap: 1rem;
@@ -165,16 +166,14 @@ button {
     color: white;
     cursor: pointer;
     transition: transform 0.2s, opacity 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 button:hover {
     opacity: 0.9;
     transform: translateY(-2px);
-}
-
-button:focus {
-    outline: 2px solid var(--secondary);
-    outline-offset: 2px;
 }
 
 button:disabled {
@@ -183,26 +182,7 @@ button:disabled {
     transform: none;
 }
 
-.tradition-indicator {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius);
-    color: white;
-    box-shadow: var(--shadow);
-    z-index: 3;
-}
-
-.sacred-canvas {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 10;
-}
-
+/* Animations */
 .glow-overlay {
     position: fixed;
     top: 0;
@@ -215,21 +195,9 @@ button:disabled {
     pointer-events: none;
 }
 
-/* Tradition-specific colors */
-.christian { background: var(--primary); }
-.islamic { background: #27ae60; }
-.hindu { background: #e74c3c; }
-.buddhist { background: var(--buddhist); color: #000; }
-.taoist { background: var(--tao); }
-.rumi { background: var(--rumi); }
-.watts { background: var(--watts); }
-.seth { background: var(--seth); }
-.cwg { background: var(--cwg); }
-.lawofone { background: var(--lawofone); }
-
-/* Animation keyframes */
-@keyframes spin {
-    to { transform: translate(-50%, -50%) rotate(360deg); }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes pulse-glow {
@@ -238,6 +206,7 @@ button:disabled {
     100% { box-shadow: 0 0 10px rgba(46, 204, 113, 0); }
 }
 
+/* Responsive Design */
 @media (max-width: 600px) {
     body {
         padding: 1rem;
@@ -247,4 +216,38 @@ button:disabled {
         width: 80px;
         height: 80px;
     }
+    
+    .wisdom-display {
+        padding: 1.5rem;
+    }
+    
+    .controls {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 }
+
+/* Tradition Indicators */
+.tradition-indicator {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    color: white;
+    box-shadow: var(--shadow);
+    z-index: 3;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Tradition-specific colors */
+.christian { background: var(--christian); }
+.islamic { background: var(--islamic); }
+.hindu { background: var(--hindu); }
+.buddhist { background: var(--buddhist); color: #000; }
+.taoist { background: var(--taoist); }
+.rumi { background: var(--rumi); }
+.watts { background: var(--watts); }
+.seth { background: var(--seth); }
+.cwg { background: var(--cwg); }
+.lawofone { background: var(--lawofone); }
