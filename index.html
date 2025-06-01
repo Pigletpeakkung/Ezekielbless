@@ -281,6 +281,142 @@
       transform: scale(1.05);
     }
 
+    /* Blessing of the Day - FIXED */
+    .blessing-of-day {
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      display: block;
+      animation: fadeIn 0.5s ease-out;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .blessing-of-day.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .blessing-of-day .blessing-text {
+      font-size: 1em;
+      color: #8b0000;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .blessing-of-day .english-reading {
+      font-size: 0.85em;
+      color: #555;
+      font-style: italic;
+      margin: 0;
+    }
+
+    /* Stats Counter */
+    .stats-counter {
+      position: fixed;
+      bottom: 120px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      z-index: 998;
+      text-align: center;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .stats-counter .stat-item {
+      display: inline-block;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+
+    .stats-counter .stat-number {
+      color: #8b0000;
+      font-size: 1.1em;
+    }
+
+    /* Quick Actions Panel */
+    .quick-actions {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 998;
+    }
+
+    .quick-action-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      font-size: 1.5em;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quick-action-btn:hover {
+      transform: scale(1.1);
+      background: #f7e7a0;
+    }
+
+    /* Progress Ring */
+    .progress-ring {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 60px;
+      height: 60px;
+      z-index: 998;
+    }
+
+    .progress-ring svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .progress-ring circle {
+      fill: none;
+      stroke-width: 4;
+    }
+
+    .progress-ring .bg {
+      stroke: rgba(255, 255, 255, 0.3);
+    }
+
+    .progress-ring .progress {
+      stroke: #f7e7a0;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.5s ease;
+    }
+
+    .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.8em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Creator Section */
     .creator-section {
       position: fixed;
       bottom: 0;
@@ -302,84 +438,6 @@
 
     .creator-section a:hover {
       text-decoration: underline;
-    }
-
-    /* Blessing of the Day - FIXED */
-.blessing-of-day {
-  position: fixed;
-  top: 80px; /* Changed from 20px to avoid controls */
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.95);
-  padding: 15px 20px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  z-index: 1001; /* Higher z-index */
-  display: block; /* Changed from 'none' to 'block' */
-  animation: fadeIn 0.5s ease-out;
-  max-width: 90%;
-  text-align: center;
-}
-
-.blessing-of-day.show {
-  display: block;
-  opacity: 1;
-}
-
-.blessing-of-day .blessing-text {
-  font-size: 1em;
-  color: #8b0000;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.blessing-of-day .english-reading {
-  font-size: 0.85em;
-  color: #555;
-  font-style: italic;
-  margin: 0;
-}
-
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    /* Explanation Section */
-    .blessing-explanation {
-      position: fixed;
-      bottom: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      max-width: 90%;
-      width: 600px;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      font-size: 0.9em;
-      z-index: 998;
-      opacity: 0.9;
-      transition: all 0.3s ease;
-    }
-
-    .explanation-text {
-      margin: 10px 0;
-      color: #444;
-      line-height: 1.5;
-    }
-
-    .explanation-toggle {
-      margin-top: 10px;
-      cursor: pointer;
-      color: #8b0000;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    .explanation-toggle:hover {
-      color: #c94242;
     }
 
     /* Controls */
@@ -437,6 +495,11 @@
       100% { opacity: 0; transform: translate(-50%, 20px); }
     }
 
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
     /* Mobile Adjustments */
     @media (max-width: 600px) {
       .controls {
@@ -461,11 +524,41 @@
         padding: 8px 12px;
       }
 
-      .blessing-explanation {
-        bottom: 80px;
+      .blessing-of-day {
+        top: 120px;
+        width: 95%;
+        font-size: 0.9em;
+        padding: 10px 15px;
+      }
+
+      .stats-counter {
+        bottom: 100px;
         width: 90%;
         font-size: 0.8em;
-        padding: 10px;
+        padding: 8px 15px;
+      }
+
+      .stats-counter .stat-item {
+        margin: 0 5px;
+        display: block;
+      }
+
+      .quick-actions {
+        bottom: 10px;
+        right: 10px;
+      }
+
+      .quick-action-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3em;
+      }
+
+      .progress-ring {
+        bottom: 10px;
+        left: 10px;
+        width: 50px;
+        height: 50px;
       }
 
       .quote-card {
@@ -524,13 +617,36 @@
 
   <!-- Blessing of the Day -->
   <div class="blessing-of-day" id="blessingOfDay">
-    <div class="blessing-text" id="blessingOfDayText">Blessing of the Day: "อมตสุขมีอยู่ในใจ" (Eternal happiness lies in the heart)</div>
-    <div class="english-reading" id="blessingOfDayEnglish">Blessing of the Day: "อมตสุขมีอยู่ในใจ" (Eternal happiness lies in the heart)</div>
+    <div class="blessing-text" id="blessingOfDayText">Daily Blessing Loading...</div>
+    <div class="english-reading" id="blessingOfDayEnglish">Please wait...</div>
   </div>
 
   <!-- Generate Button (Sun Button Centered) -->
   <div class="generate-container" role="button" tabindex="0" aria-label="Generate a new blessing">
     <button class="generate-btn" id="starButton" aria-label="Generate a new blessing">☀️</button>
+  </div>
+
+  <!-- Stats Counter -->
+  <div class="stats-counter" id="statsCounter">
+    <span class="stat-item">🙏 Blessings Read: <span class="stat-number" id="blessingsCount">0</span></span>
+    <span class="stat-item">❤️ Favorites: <span class="stat-number" id="favoritesCount">0</span></span>
+    <span class="stat-item">📅 Days Active: <span class="stat-number" id="daysActive">1</span></span>
+  </div>
+
+  <!-- Progress Ring -->
+  <div class="progress-ring" id="progressRing">
+    <svg>
+      <circle class="bg" cx="30" cy="30" r="26"></circle>
+      <circle class="progress" cx="30" cy="30" r="26" stroke-dasharray="163.36" stroke-dashoffset="163.36"></circle>
+    </svg>
+    <div class="progress-text" id="progressText">0%</div>
+  </div>
+
+  <!-- Quick Actions Panel -->
+  <div class="quick-actions">
+    <button class="quick-action-btn" id="randomBlessingBtn" title="Random Blessing">🎲</button>
+    <button class="quick-action-btn" id="favoritesBtn" title="View Favorites">❤️</button>
+    <button class="quick-action-btn" id="settingsBtn" title="Settings">⚙️</button>
   </div>
 
   <!-- Mandala Animation -->
@@ -555,18 +671,6 @@
   <!-- White Splash Effect -->
   <div class="white-splash" id="whiteSplash"></div>
 
-  <!-- Explanation Section -->
-  <div class="blessing-explanation" id="blessingExplanation">
-    <h3>✨ What Does This Blessing Mean?</h3>
-    <p class="explanation-text">
-      These blessings are rooted in Buddhist teachings and often reflect values such as peace, compassion, wisdom, and inner harmony. They may be recited during meditation, shared with others, or kept as personal mantras for reflection.
-    </p>
-    <p class="explanation-text">
-      In Thai Buddhist tradition, these passages are used to cultivate mindfulness, express gratitude, and promote well-being. Reciting them helps one connect with spiritual truths and internalize positive intentions.
-    </p>
-    <p class="explanation-toggle" id="explanationToggle">Hide Explanation</p>
-  </div>
-
   <!-- Creator Section -->
   <div class="creator-section" id="creatorSection">
     <p>Created by <a href="https://pigletpeakkung.github.io/Thannxai/" target="_blank">Thanatsitt Santisamranwilai</a> 🙏 | 
@@ -578,30 +682,22 @@
   <div class="notification" id="notification"></div>
 
   <script>
-    // Random Thai Temple Images (13 images - all verified web3/CDN URLs)
-cons// Random Thai Temple Images (13 verified working URLs)
-const templeImages = [
-  // Unsplash - Thai Temples (verified working)
-  "https://images.unsplash.com/photo-1528181304800-259b08848526?w=800&q=80", // Wat Arun Bangkok
-  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80", // Thai Temple
-  "https://images.unsplash.com/photo-1563906267088-b029e7101114?w=800&q=80", // Temple Complex
-  "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80", // Thai Architecture
-  "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80", // Temple Interior
-  "https://images.unsplash.com/photo-1566844537468-2860d607fdfe?w=800&q=80", // Buddhist Statue
-  "https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800&q=80", // Temple Garden
-  "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&q=80", // Golden Buddha
-  
-  // Pexels - Thai/Buddhist Images (verified working)
-  "https://images.pexels.com/photos/1007025/pexels-photo-1007025.jpeg?w=800&h=600&fit=crop", // Thai Temple
-  "https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?w=800&h=600&fit=crop", // Buddha Statue
-  "https://images.pexels.com/photos/1007024/pexels-photo-1007024.jpeg?w=800&h=600&fit=crop", // Temple Architecture
-  "https://images.pexels.com/photos/1386595/pexels-photo-1386595.jpeg?w=800&h=600&fit=crop", // Golden Temple
-  "https://images.pexels.com/photos/1386600/pexels-photo-1386600.jpeg?w=800&h=600&fit=crop", // Buddhist Temple
-  
-  // Fallback placeholder
-  "https://via.placeholder.com/600x400/f7e7a0/333333?text=Thai+Temple+Blessing"
-];
-
+    // Random Thai Temple Images (13 verified working URLs)
+    const templeImages = [
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?w=800&q=80",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+      "https://images.unsplash.com/photo-1563906267088-b029e7101114?w=800&q=80",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
+      "https://images.unsplash.com/photo-1566844537468-2860d607fdfe?w=800&q=80",
+      "https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800&q=80",
+      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&q=80",
+      "https://images.pexels.com/photos/1007025/pexels-photo-1007025.jpeg?w=800&h=600&fit=crop",
+      "https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?w=800&h=600&fit=crop",
+      "https://images.pexels.com/photos/1007024/pexels-photo-1007024.jpeg?w=800&h=600&fit=crop",
+      "https://images.pexels.com/photos/1386595/pexels-photo-1386595.jpeg?w=800&h=600&fit=crop",
+      "https://via.placeholder.com/600x400/f7e7a0/333333?text=Thai+Temple+Blessing"
+    ];
 
     // Daily Blessings
     let blessingsOfDay = [
@@ -716,7 +812,7 @@ const templeImages = [
         source: "Buddhism",
         theme: "theme-wat-arun"
       },
-      {
+       {
         id: 6,
         text: "จัตตาโร สติปัฏฐานา จัตตาโร อิทธิปาทา สัมมาอาชีโว",
         englishReading: "The four frames of reference, the four great powers, and the right livelihood.",
@@ -962,39 +1058,62 @@ const templeImages = [
         theme: "theme-wat-phra-singh"
       }
     ];
-
-    let usedPassages = [];
+let usedPassages = [];
     let favorites = [];
     let quotesRead = 0;
     let currentQuote = null;
     let isGenerating = false;
     let ttsDisabled = false;
     let autoHideTimer = null;
+    let daysActive = 1;
 
     // Validate localStorage
     try {
       usedPassages = JSON.parse(localStorage.getItem('usedPassages')) || [];
       favorites = JSON.parse(localStorage.getItem('favorites')) || [];
       quotesRead = parseInt(localStorage.getItem('quotesRead')) || 0;
+      daysActive = parseInt(localStorage.getItem('daysActive')) || 1;
     } catch (e) {
       showNotification("Failed to load saved data. Resetting...");
       usedPassages = [];
       favorites = [];
       quotesRead = 0;
+      daysActive = 1;
     }
 
-    // Validate all IDs are unique at app start
-    if (new Set(passages.map(p => p.id)).size !== passages.length) {
-      showNotification("Error: Duplicate passage IDs found. Resetting...");
-      usedPassages = [];
-      localStorage.removeItem("usedPassages");
+    // Update stats display
+    function updateStats() {
+      document.getElementById('blessingsCount').textContent = quotesRead;
+      document.getElementById('favoritesCount').textContent = favorites.length;
+      document.getElementById('daysActive').textContent = daysActive;
+      
+      // Update progress ring
+      const progress = Math.min((quotesRead / 40) * 100, 100);
+      const circumference = 163.36;
+      const offset = circumference - (progress / 100) * circumference;
+      document.querySelector('.progress').style.strokeDashoffset = offset;
+      document.getElementById('progressText').textContent = Math.round(progress) + '%';
+    }
+
+    // Track daily usage
+    function trackDailyUsage() {
+      const today = new Date().toISOString().split('T')[0];
+      const lastVisit = localStorage.getItem('lastVisit');
+      
+      if (lastVisit !== today) {
+        if (lastVisit) {
+          daysActive++;
+          localStorage.setItem('daysActive', daysActive.toString());
+        }
+        localStorage.setItem('lastVisit', today);
+      }
     }
 
     // Show white splash effect
     function showWhiteSplash() {
       const splash = document.getElementById('whiteSplash');
       splash.style.display = 'block';
-      splash.offsetHeight; // Trigger reflow for animation
+      splash.offsetHeight;
       splash.style.animation = 'splashEffect 0.5s ease-out forwards';
       setTimeout(() => {
         splash.style.display = 'none';
@@ -1067,12 +1186,11 @@ const templeImages = [
       utterance.pitch = 0.9;
       utterance.volume = 1.0;
 
-      // Function to set voice with retry if voices aren't loaded
       function setVoice(attempts = 0) {
         const voices = window.speechSynthesis.getVoices();
         if (voices.length === 0 && attempts < 10) {
           showTTSStatus("Loading voices, please wait...", 'speaking');
-          setTimeout(() => setVoice(attempts + 1), 500); // Retry after 500ms
+          setTimeout(() => setVoice(attempts + 1), 500);
           return false;
         } else if (voices.length === 0) {
           showTTSStatus("No voices loaded. TTS unavailable.", 'error');
@@ -1089,7 +1207,7 @@ const templeImages = [
           if (defaultVoice) {
             utterance.voice = defaultVoice;
           } else {
-            const anyVoice = voices[0]; // Fallback to any voice
+            const anyVoice = voices[0];
             if (anyVoice) {
               utterance.voice = anyVoice;
               showTTSStatus(`Using fallback voice (not ${lang === 'th-TH' ? 'Thai' : 'English'})`, 'speaking');
@@ -1139,38 +1257,26 @@ const templeImages = [
         quoteCard.classList.add('show');
       }, 100);
 
-      // Auto-hide after 30 seconds
-      if (autoHideTimer) clearTimeout(autoHideTimer); // Clear any existing timer
+      if (autoHideTimer) clearTimeout(autoHideTimer);
       autoHideTimer = setTimeout(() => {
         quoteCard.classList.add('hiding');
         setTimeout(() => {
           quoteCard.classList.remove('show');
           quoteCard.style.display = 'none';
           quoteCard.classList.remove('hiding');
-        }, 500); // Matches the CSS transition duration
-      }, 30000); // 30 seconds
+        }, 500);
+      }, 30000);
     }
 
-    // Optionally clear auto-hide timer on user interaction
     function setupCardInteractions() {
       const quoteCard = document.getElementById('quoteCard');
       quoteCard.addEventListener('click', () => {
         if (autoHideTimer) {
-          clearTimeout(autoHideTimer); // Stop auto-hide if user interacts with the card
+          clearTimeout(autoHideTimer);
         }
       });
     }
 
-    // Toggle Explanation
-    function toggleExplanation() {
-      const toggleBtn = document.getElementById('explanationToggle');
-      const explanation = document.getElementById('blessingExplanation');
-      const isHidden = !explanation.style.display || explanation.style.display === 'none';
-      explanation.style.display = isHidden ? 'block' : 'none';
-      toggleBtn.textContent = isHidden ? 'Hide Explanation' : 'Show Explanation';
-    }
-
-    // Close Quote Card
     function closeQuoteCard() {
       const quoteCard = document.getElementById('quoteCard');
       quoteCard.classList.remove('show');
@@ -1209,36 +1315,34 @@ const templeImages = [
       displayQuote(randomPassage);
       createMandalaAnimation(document.body.className);
       enhancedTTS(randomPassage.text, true, document.getElementById('ttsLanguage').value);
+      updateStats();
       isGenerating = false;
     }
 
-// Blessing of the Day - FIXED
-function updateBlessingOfDay() {
-  const today = new Date().toISOString().split('T')[0];
-  const lastBlessing = localStorage.getItem('lastBlessingOfDay');
-  const blessingOfDayEl = document.getElementById('blessingOfDay');
-  const blessingOfDayText = document.getElementById('blessingOfDayText');
-  const blessingOfDayEnglish = document.getElementById('blessingOfDayEnglish');
+    // Blessing of the Day - FIXED
+    function updateBlessingOfDay() {
+      const today = new Date().toISOString().split('T')[0];
+      const lastBlessing = localStorage.getItem('lastBlessingOfDay');
+      const blessingOfDayEl = document.getElementById('blessingOfDay');
+      const blessingOfDayText = document.getElementById('blessingOfDayText');
+      const blessingOfDayEnglish = document.getElementById('blessingOfDayEnglish');
 
-  // Always show a blessing (remove the date check for testing)
-  const randomBlessing = blessingsOfDay[Math.floor(Math.random() * blessingsOfDay.length)];
-  blessingOfDayText.textContent = `Daily Blessing: "${randomBlessing.thai}"`;
-  blessingOfDayEnglish.textContent = `${randomBlessing.english} — ${randomBlessing.source}`;
-  
-  // Show the element
-  blessingOfDayEl.style.display = 'block';
-  blessingOfDayEl.classList.add('show');
-  
-  // Save today's date
-  localStorage.setItem('lastBlessingOfDay', today);
-  
-  console.log("Daily blessing updated:", randomBlessing.thai); // Debug log
-}
-
+      const randomBlessing = blessingsOfDay[Math.floor(Math.random() * blessingsOfDay.length)];
+      blessingOfDayText.textContent = `Daily Blessing: "${randomBlessing.thai}"`;
+      blessingOfDayEnglish.textContent = `${randomBlessing.english} — ${randomBlessing.source}`;
+      
+      blessingOfDayEl.style.display = 'block';
+      blessingOfDayEl.classList.add('show');
+      
+      localStorage.setItem('lastBlessingOfDay', today);
+    }
 
     // Initialize App
     window.addEventListener('DOMContentLoaded', () => {
+      trackDailyUsage();
       updateBlessingOfDay();
+      updateStats();
+      
       document.getElementById('themeSelector').value = localStorage.getItem('selectedTheme') || 'theme-wat-pra-kew';
       document.body.className = document.getElementById('themeSelector').value;
 
@@ -1255,12 +1359,14 @@ function updateBlessingOfDay() {
       document.getElementById('playBtn').addEventListener('click', () => {
         if (currentQuote) enhancedTTS(currentQuote.text, true, document.getElementById('ttsLanguage').value);
       });
+      
       document.getElementById('blessingBtn').addEventListener('click', () => {
         if (currentQuote) {
           createMandalaAnimation(document.body.className);
           showNotification("🙏🏻 Blessing sent!");
         }
       });
+      
       document.getElementById('favoriteBtn').addEventListener('click', () => {
         if (!currentQuote) return;
         const isFavorited = favorites.some(fav => fav.id === currentQuote.id);
@@ -1272,7 +1378,9 @@ function updateBlessingOfDay() {
           showNotification('Added to favorites! ❤️');
         }
         localStorage.setItem('favorites', JSON.stringify(favorites));
+        updateStats();
       });
+      
       document.getElementById('shareBtn').addEventListener('click', () => {
         if (!currentQuote) return;
         const textToShare = currentQuote.text + "\n— " + currentQuote.source;
@@ -1282,6 +1390,7 @@ function updateBlessingOfDay() {
           showNotification("Share not supported. Copy and share manually.");
         }
       });
+      
       document.getElementById('copyBtn').addEventListener('click', () => {
         if (!currentQuote) return;
         const textToCopy = currentQuote.text + "\n— " + currentQuote.source;
@@ -1289,29 +1398,41 @@ function updateBlessingOfDay() {
           showNotification("Blessing copied to clipboard! 📋");
         });
       });
+      
       document.getElementById('closeCard').addEventListener('click', closeQuoteCard);
-      document.getElementById('explanationToggle').addEventListener('click', toggleExplanation);
 
-      // Add interaction listener to prevent auto-hide on click
-      setupCardInteractions();
-
-      // Show initial explanation
-      toggleExplanation();
-
-      // Show welcome message
+      // Quick Actions
+      document.getElementById('randomBlessingBtn').addEventListener('click', generatePassage);
+      
+      document.getElementById('favoritesBtn').addEventListener('click', () => {
+        if (favorites.length === 0) {
+          showNotification("No favorites saved yet. Save some blessings first! ❤️");
+          return;
+        }
+        const randomFavorite = favorites[Math.floor(Math.random() * favorites.length)];
+        currentQuote = randomFavorite;
+        displayQuote(randomFavorite);
+        showNotification("Showing a favorite blessing! ❤️");
+      });
+      
+      document.getElementById('settingsBtn').addEventListener('click', () => {
+        showNotification("Settings: Use the dropdowns above to customize your experience! ⚙️");
+      });
+setupCardInteractions();
       showNotification('🙏🏻 Welcome to Blessing of Siam! Click ☀️ to start 🙏🏻');
 
-      // Load voices early
       if (window.speechSynthesis) {
-        window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.onvoicesc0hanged = () => {
           console.log("Voices loaded:", window.speechSynthesis.getVoices());
         };
-        window.speechSynthesis.getVoices(); // Trigger voice loading
+        window.speechSynthesis.getVoices();
       }
 
-      // Generate a blessing on load
       generatePassage();
     });
   </script>
 </body>
 </html>
+
+
+      
