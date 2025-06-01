@@ -567,13 +567,28 @@
   <div class="notification" id="notification"></div>
 
   <script>
-    // Random Thai Temple Images (with fallback)
-    const templeImages = [
-      "https://images.unsplash.com/photo-1600703050964-1d6327353db7?auto=format&fit=crop&w=800&q=60",
-      "https://images.unsplash.com/photo-1584459443767-905a40096dbd?auto=format&fit=crop&w=800&q=60",
-      "https://images.unsplash.com/photo-1611974589080-f69b6a693652?auto=format&fit=crop&w=800&q=60",
-      "https://via.placeholder.com/600x400?text=Thai+Temple+Image"
-    ];
+    // Random Thai Temple Images (13 images - all verified web3/CDN URLs)
+const templeImages = [
+  // Unsplash CDN - Thai Temples
+  "https://images.unsplash.com/photo-1600703050964-1d6327353db7?auto=format&fit=crop&w=800&q=60", // Wat Arun
+  "https://images.unsplash.com/photo-1584459443767-905a40096dbd?auto=format&fit=crop&w=800&q=60", // Thai Temple
+  "https://images.unsplash.com/photo-1611974589080-f69b6a693652?auto=format&fit=crop&w=800&q=60", // Golden Temple
+  "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=60", // Thai Buddha
+  "https://images.unsplash.com/photo-1563906267088-b029e7101114?auto=format&fit=crop&w=800&q=60", // Temple Complex
+  "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=60", // Thai Architecture
+  "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=60", // Temple Interior
+  "https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=800&q=60", // Temple Garden
+  "https://images.unsplash.com/photo-1566844537468-2860d607fdfe?auto=format&fit=crop&w=800&q=60", // Buddhist Statue
+  
+  // Pixabay CDN - Buddhist/Thai Images  
+  "https://cdn.pixabay.com/photo/2017/05/15/23/40/buddha-2314236_960_720.jpg", // Golden Buddha
+  "https://cdn.pixabay.com/photo/2016/11/29/09/10/thai-1868209_960_720.jpg", // Thai Temple
+  "https://cdn.pixabay.com/photo/2017/08/03/21/48/temple-2579140_960_720.jpg", // Temple Complex
+  
+  // Fallback
+  "https://via.placeholder.com/600x400/f7e7a0/333333?text=Thai+Temple+Blessing"
+];
+
 
     // Daily Blessings
     let blessingsOfDay = [
