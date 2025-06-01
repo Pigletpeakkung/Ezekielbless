@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blessing of Siam</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet" />
-  <script src="https://code.responsivevoice.org/responsivevoice.js?key=EKb5eEhk"></script>
   <style>
     /* Base Styles */
     body {
@@ -123,32 +122,34 @@
     }
 
     /* Quote Card */
-    .quote-card {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      max-width: 90%;
-      width: 600px;
-      padding: 25px;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      display: none;
-      text-align: center;
-      font-size: 1.1em;
-      transition: all 0.5s ease;
-      z-index: 999;
-      animation: slideIn 0.5s ease-out;
-    }
+.quote-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  width: 600px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  display: none;
+  text-align: center;
+  font-size: 1.1em;
+  transition: opacity 0.5s ease;
+  z-index: 999;
+  animation: slideIn 0.5s ease-out;
+}
 
-    .quote-card.show {
-      display: block;
-    }
+.quote-card.show {
+  display: block;
+  opacity: 1;
+}
 
-    .quote-card.hiding {
-      opacity: 0;
-    }
+.quote-card.hiding {
+  opacity: 0;
+}
+
 
     @keyframes slideIn {
       0% { transform: translate(-50%, -60%); opacity: 0; }
@@ -323,7 +324,7 @@
       display: block;
     }
 
-    .blessing-text {
+    .blessing-of-day .blessing-text {
       font-size: 1em;
       color: #8b0000;
       font-weight: bold;
@@ -530,7 +531,7 @@
     <div class="quote-text pali-text" id="quoteText"></div>
     <div class="english-reading" id="englishReading"></div>
     <div class="quote-source" id="quoteSource"></div>
-    <img class="quote-image" id="quoteImage" style="display:none;" alt="Blessing illustration" />
+    <div class="quote-image" id="quoteImage"></div>
     <div class="quote-actions">
       <button class="action-btn blessing-btn" id="blessingBtn" aria-label="Send a blessing">🙏🏻 Send Blessing</button>
       <button class="action-btn secondary-btn" id="playBtn" aria-label="Listen to the blessing">🔊 Listen</button>
@@ -548,10 +549,10 @@
   <div class="blessing-explanation" id="blessingExplanation">
     <h3>✨ What Does This Blessing Mean?</h3>
     <p class="explanation-text">
-      These blessings are rooted in Buddhist teachings and often reflect values such as peace, compassion, wisdom, and inner harmony. They may be recited during meditation, shared with others, or kept as reminders for daily living.
+      These blessings are rooted in Buddhist teachings and often reflect values such as peace, compassion, wisdom, and inner harmony. They may be recited during meditation, shared with others, or kept as personal mantras for reflection.
     </p>
     <p class="explanation-text">
-      In Thai Buddhist tradition, these passages are used to cultivate mindfulness, express gratitude, and promote well-being. Reciting them helps one connect with spiritual truths and internalize positive qualities.
+      In Thai Buddhist tradition, these passages are used to cultivate mindfulness, express gratitude, and promote well-being. Reciting them helps one connect with spiritual truths and internalize positive intentions.
     </p>
     <p class="explanation-toggle" id="explanationToggle">Hide Explanation</p>
   </div>
@@ -576,82 +577,83 @@
     ];
 
     // Daily Blessings
-    let blessingsOfDay = [
-      {
-        id: 654,
-        thai: "จงใช้ชีวิตในปัจจุบันอย่างมีสติและปัญญา",
-        english: "Live in the present moment wisely.",
-        source: "S.N. Goenka"
-      },
-      {
-        id: 655,
-        thai: "วิปัสสนาหมายถึง 'การมองเห็นสิ่งต่างๆ ตามความเป็นจริง' ไม่ใช่ตามที่มันดูเหมือนจะเป็น",
-        english: "Vipassana means 'to see things as they really are', not as they appear to be.",
-        source: "S.N. Goenka"
-      },
-      {
-        id: 656,
-        thai: "ทุกความรู้สึกเกิดขึ้นเพื่อดับไป ไม่มีสิ่งใดถาวร นี่คือกฎแห่งอนิจจัง",
-        english: "Every sensation arises to pass away. Nothing is eternal. This is the law of impermanence.",
-        source: "S.N. Goenka"
-      },
-      {
-        id: 657,
-        thai: "รากเหง้าของความทุกข์คือความอยากและความเกลียดชัง กำจัดมันเสีย และคุณจะกำจัดความทุกข์ได้",
-        english: "The root of suffering is craving and aversion. Eradicate them, and you eradicate suffering.",
-        source: "S.N. Goenka"
-      },
-      {
-        id: 658,
-        thai: "ทำงานอย่างขยันหมั่นเพียร ทำงานอย่างอดทน ทำงานอย่างต่อเนื่อง คุณจะต้องประสบความสำเร็จแน่นอน",
-        english: "Work diligently. Work patiently. Work persistently. You are bound to be successful.",
-        source: "S.N. Goenka"
-      },
-      {
-        id: 659,
-        thai: "ธรรมะไม่ใช่ปรัชญา ธรรมะเป็นวิธีปฏิบัติเพื่อใช้ชีวิตอย่างมีความสุข",
-        english: "Dhamma is not a philosophy. Dhamma is a practical way of living a happy life.",
-        source: "S.N. Goenka"
-      },
-      {
-        id: 660,
-        thai: "เมื่อคุณนั่งสมาธิ อย่าคาดหวังอะไร อย่าปรารถนาอะไร อย่าปฏิเสธอะไร",
-        english: "When you meditate, don't expect anything, don't crave for anything, don't reject anything.",
-        source: "S.N. Goenka"
-      },
-      {
-        id: 661,
-        thai: "จักรวาลทั้งหมดเป็นเพียงการสั่นสะเทือน เกิดขึ้นและดับไป",
-        english: "The entire universe is nothing but vibration, arising and passing.",
-        source: "S.N. Goenka"
-      },
-      {
-        id: 662,
-        thai: "ลมหายใจของคุณคือสะพานเชื่อมระหว่างจิตสำนึกและจิตไร้สำนึก",
-        english: "Your breath is the bridge between the conscious and unconscious mind.",
-        source: "S.N. Goenka"
-      },
-      {
-        id: 663,
-        thai: "การหลุดพ้นเป็นไปได้ที่นี่และเดี๋ยวนี้ ไม่ใช่ในสวรรค์ที่จินตนาการขึ้น",
-        english: "Liberation is possible here and now, not in some imaginary heaven.",
-        source: "S.N. Goenka"
-      },
-      {
-        id: 664,
-        thai: "จิตที่บริสุทธิ์เต็มไปด้วยความรัก—ความรักต่อทุกสรรพสิ่งโดยไม่เลือกปฏิบัติ",
-        english: "A pure mind is full of love—love for all beings without discrimination.",
-        source: "S.N. Goenka"
-      },
-      {
-        id: 665,
-        thai: "จิตใจเหมือนเด็กที่ถูกตามใจ—ยิ่งคุณตามใจมันมากเท่าไหร่ มันยิ่งเรียกร้องมากขึ้นเท่านั้น",
-        english: "The mind is like a spoiled child—the more you pamper it, the more it demands.",
-        source: "S.N. Goenka"
-      }
-    ];
+let blessingsOfDay = [
+  {
+    id: 654,
+    thai: "จงใช้ชีวิตในปัจจุบันอย่างมีสติและปัญญา",
+    english: "Live in the present moment wisely.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 655,
+    thai: "วิปัสสนาหมายถึง 'การมองเห็นสิ่งต่างๆ ตามความเป็นจริง' ไม่ใช่ตามที่มันดูเหมือนจะเป็น",
+    english: "Vipassana means 'to see things as they really are', not as they appear to be.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 656,
+    thai: "ทุกความรู้สึกเกิดขึ้นเพื่อดับไป ไม่มีสิ่งใดถาวร นี่คือกฎแห่งอนิจจัง",
+    english: "Every sensation arises to pass away. Nothing is eternal. This is the law of impermanence.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 657,
+    thai: "รากเหง้าของความทุกข์คือความอยากและความเกลียดชัง กำจัดมันเสีย และคุณจะกำจัดความทุกข์ได้",
+    english: "The root of suffering is craving and aversion. Eradicate them, and you eradicate suffering.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 658,
+    thai: "ทำงานอย่างขยันหมั่นเพียร ทำงานอย่างอดทน ทำงานอย่างต่อเนื่อง คุณจะต้องประสบความสำเร็จแน่นอน",
+    english: "Work diligently. Work patiently. Work persistently. You are bound to be successful.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 659,
+    thai: "ธรรมะไม่ใช่ปรัชญา ธรรมะเป็นวิธีปฏิบัติเพื่อใช้ชีวิตอย่างมีความสุข",
+    english: "Dhamma is not a philosophy. Dhamma is a practical way of living a happy life.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 660,
+    thai: "เมื่อคุณนั่งสมาธิ อย่าคาดหวังอะไร อย่าปรารถนาอะไร อย่าปฏิเสธอะไร",
+    english: "When you meditate, don't expect anything, don't crave for anything, don't reject anything.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 661,
+    thai: "จักรวาลทั้งหมดเป็นเพียงการสั่นสะเทือน เกิดขึ้นและดับไป",
+    english: "The entire universe is nothing but vibration, arising and passing.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 662,
+    thai: "ลมหายใจของคุณคือสะพานเชื่อมระหว่างจิตสำนึกและจิตไร้สำนึก",
+    english: "Your breath is the bridge between the conscious and unconscious mind.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 663,
+    thai: "การหลุดพ้นเป็นไปได้ที่นี่และเดี๋ยวนี้ ไม่ใช่ในสวรรค์ที่จินตนาการขึ้น",
+    english: "Liberation is possible here and now, not in some imaginary heaven.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 664,
+    thai: "จิตที่บริสุทธิ์เต็มไปด้วยความรัก—ความรักต่อทุกสรรพสิ่งโดยไม่เลือกปฏิบัติ",
+    english: "A pure mind is full of love—love for all beings without discrimination.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 665,
+    thai: "จิตใจเหมือนเด็กที่ถูกตามใจ—ยิ่งคุณตามใจมันมากเท่าไหร่ มันยิ่งเรียกร้องมากขึ้นเท่านั้น",
+    english: "The mind is like a spoiled child—the more you pamper it, the more it demands.",
+    source: "S.N. Goenka"
+  }
+];
 
-    // Passages (up to ID 40 as provided)
+
+    // Passages with complete English translations
     const passages = [
       {
         id: 1,
@@ -683,7 +685,7 @@
       },
       {
         id: 5,
-        text: "สังฆัง ชีวิตัง ยาวะ นิพพานัง สะระณัง คัจฉามิ\nสุปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nอุชุปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nญายะปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nสามีจิปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nยะทิทัง จัตตาริ ปุริสะยุคานิ อัฏฐะ ปุริสะปุคคะลา\nเอสะ ภะคะวะโต สาวะกะสังโฆ\nอาหุเนยโย ปาหุเนยโย ทักขิเนยโย อัญชะลีกะระณีโย\nอะนุตตะรัง ปุญญักเขตตัง โลกัสสาติ",
+        text: "สังฆัง ชีวิตัง ยาวะ นิพพานัง สะระณัง คัจฉามิ\nสุปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nอุชุปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nญายะปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nสามีจิปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nยะทิทัง จัตตาริ ปุริสะยุคานิ อัฏฐะ ปุริสะปุคคะลา\nเอสะ ภะคะวะโต สาวะกะสังโฆ\nอาหุเนยโย ปาหุเนยโย ทักขิเนยโย อัญชะลีกะระणีโย\nอะนุตตะรัง ปุญญักเขตตัง โลกัสสาติ",
         englishReading: "I go for refuge to the Sangha, the living one, until Nibbana.\nThe well-taught Sangha, the well-disciplined Sangha, the ardent Sangha, the wise Sangha, the noble Sangha of the Buddha.\nThey rightly understand the four foundations of mindfulness, eightfold path, and eight great qualities. This is the noble Sangha of the Buddha, worthy to be given alms, honored, and respected as an unsurpassed blessing to the world.",
         source: "Buddhism",
         theme: "theme-wat-arun"
@@ -849,7 +851,8 @@
         source: "Buddhism",
         theme: "theme-wat-phra-singh"
       },
-              id: 29,
+      {
+        id: 29,
         text: "ปิณินทฺริยัง นะมามิหัง",
         englishReading: "I bow to the Buddha, the One who is praised by the world.",
         source: "Buddhism",
@@ -905,7 +908,7 @@
         theme: "theme-wat-benchamabophit"
       },
       {
-        id: 37,
+                id: 37,
         text: "เอสะ ภะคะวะโต สาวะกะสังโฆ",
         englishReading: "This is the noble Sangha of the Buddha.",
         source: "Buddhism",
@@ -939,7 +942,6 @@
     let quotesRead = 0;
     let currentQuote = null;
     let isGenerating = false;
-    let ttsDisabled = false;
 
     // Validate localStorage
     try {
@@ -966,9 +968,6 @@
       splash.style.display = 'block';
       splash.offsetHeight; // Trigger reflow for animation
       splash.style.animation = 'splashEffect 0.5s ease-out forwards';
-      setTimeout(() => {
-        splash.style.display = 'none';
-      }, 500);
     }
 
     // Mandala Animation
@@ -985,18 +984,14 @@
 
       setTimeout(() => {
         mandala.classList.remove('show');
-        mandala.style.display = 'none';
       }, 5000);
     }
 
     // Show Notification
-    function showNotification(message, timeout = 3000) {
+    function showNotification(message) {
       const notification = document.getElementById('notification');
       notification.textContent = message;
       notification.style.display = 'block';
-      setTimeout(() => {
-        notification.style.display = 'none';
-      }, timeout);
     }
 
     // Show TTS Status
@@ -1017,105 +1012,79 @@
       statusEl.style.display = 'none';
     }
 
-    // Enhanced TTS with fallback to ResponsiveVoice
-    function enhancedTTS(text, autoPlay = false, lang = 'th-TH') {
-      if (ttsDisabled) {
-        showTTSStatus("TTS is disabled due to earlier error.", 'error');
-        return null;
-      }
-      if (!window.speechSynthesis) {
-        showTTSStatus('TTS not supported. Falling back to alternative TTS.', 'error');
-        useResponsiveVoice(text, autoPlay, lang);
-        return null;
-      }
+let ttsDisabled = false;
 
-      window.speechSynthesis.cancel();
+function enhancedTTS(text, autoPlay = false, lang = 'th-TH') {
+  if (ttsDisabled) {
+    showTTSStatus("TTS is disabled due to earlier error.", 'error');
+    return null;
+  }
+  if (!window.speechSynthesis) {
+    showTTSStatus('TTS not supported. Please use a modern browser like Chrome.', 'error');
+    ttsDisabled = true;
+    return null;
+  }
 
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = lang;
-      utterance.rate = 1.4;
-      utterance.pitch = 0.9;
-      utterance.volume = 1.0;
+  window.speechSynthesis.cancel();
 
-      // Function to set voice with retry if voices aren't loaded
-      function setVoice(attempts = 0) {
-        const voices = window.speechSynthesis.getVoices();
-        if (voices.length === 0 && attempts < 10) {
-          showTTSStatus("Loading voices, please wait...", 'speaking');
-          setTimeout(() => setVoice(attempts + 1), 500); // Retry after 500ms
-          return false;
-        } else if (voices.length === 0) {
-          showTTSStatus("No voices loaded. Falling back to alternative TTS.", 'error');
-          useResponsiveVoice(text, autoPlay, lang);
-          return false;
-        }
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = lang;
+  utterance.rate = 1.4;
+  utterance.pitch = 0.9;
+  utterance.volume = 1.0;
 
-        const langPrefix = lang.split('-')[0];
-        const maleVoice = voices.find(v => v.lang.includes(langPrefix) && v.name.toLowerCase().includes('male'));
-        if (maleVoice) {
-          utterance.voice = maleVoice;
+  // Function to set voice with retry if voices aren't loaded
+  function setVoice(attempts = 0) {
+    const voices = window.speechSynthesis.getVoices();
+    if (voices.length === 0 && attempts < 10) {
+      showTTSStatus("Loading voices, please wait...", 'speaking');
+      setTimeout(() => setVoice(attempts + 1), 500); // Retry after 500ms
+      return false;
+    } else if (voices.length === 0) {
+      showTTSStatus("No voices loaded. TTS unavailable.", 'error');
+      ttsDisabled = true;
+      return false;
+    }
+
+    const langPrefix = lang.split('-')[0];
+    const maleVoice = voices.find(v => v.lang.includes(langPrefix) && v.name.toLowerCase().includes('male'));
+    if (maleVoice) {
+      utterance.voice = maleVoice;
+    } else {
+      const defaultVoice = voices.find(v => v.lang.includes(langPrefix));
+      if (defaultVoice) {
+        utterance.voice = defaultVoice;
+      } else {
+        const anyVoice = voices[0]; // Fallback to any voice
+        if (anyVoice) {
+          utterance.voice = anyVoice;
+          showTTSStatus(`Using fallback voice (not ${lang === 'th-TH' ? 'Thai' : 'English'})`, 'speaking');
         } else {
-          const defaultVoice = voices.find(v => v.lang.includes(langPrefix));
-          if (defaultVoice) {
-            utterance.voice = defaultVoice;
-          } else {
-            const anyVoice = voices[0]; // Fallback to any voice
-            if (anyVoice) {
-              utterance.voice = anyVoice;
-              showTTSStatus(`Using fallback voice (not ${lang === 'th-TH' ? 'Thai' : 'English'})`, 'speaking');
-            } else {
-              showTTSStatus("No voices found. Falling back to alternative TTS.", 'error');
-              useResponsiveVoice(text, autoPlay, lang);
-              return false;
-            }
-          }
+          showTTSStatus("No suitable voice found for " + (lang === 'th-TH' ? 'Thai' : 'English') + ". Ensure your device/browser supports this language.", 'error');
+          ttsDisabled = true;
+          return false;
         }
-        return true;
-      }
-
-      if (setVoice()) {
-        showTTSStatus(`🔊 Speaking in ${lang === 'th-TH' ? 'Pali (Thai)' : 'English'}...`, 'speaking');
-        if (autoPlay) window.speechSynthesis.speak(utterance);
-      }
-
-      utterance.onend = () => hideTTSStatus();
-      utterance.onerror = (e) => {
-        showTTSStatus(`Voice error: ${e.error}. Falling back to alternative TTS.`, 'error');
-        useResponsiveVoice(text, autoPlay, lang);
-      };
-
-      return utterance;
-    }
-
-    // Fallback to ResponsiveVoice if Web Speech API fails
-    function useResponsiveVoice(text, autoPlay, lang) {
-      if (typeof responsiveVoice === 'undefined') {
-        showTTSStatus("Alternative TTS library not loaded. TTS unavailable.", 'error');
-        ttsDisabled = true;
-        return;
-      }
-
-      const voiceName = lang === 'th-TH' ? 'Thai Female' : 'US English Male';
-      showTTSStatus(`🔊 Using fallback TTS for ${lang === 'th-TH' ? 'Thai' : 'English'}...`, 'speaking');
-
-      if (autoPlay) {
-        responsiveVoice.speak(text, voiceName, {
-          rate: 1.2, // Slightly slower than Web Speech API rate for clarity
-          pitch: 1.0,
-          volume: 1.0,
-          onend: () => hideTTSStatus(),
-          onerror: () => {
-            showTTSStatus("Fallback TTS failed. TTS unavailable.", 'error');
-            ttsDisabled = true;
-          }
-        });
       }
     }
+    return true;
+  }
 
-    // Auto-hide timer variable to manage clearing if needed
-    let autoHideTimer = null;
+  if (setVoice()) {
+    showTTSStatus(`🔊 Speaking in ${lang === 'th-TH' ? 'Pali (Thai)' : 'English'}...`, 'speaking');
+    if (autoPlay) window.speechSynthesis.speak(utterance);
+  }
 
-    // Display Quote with Auto-Hide
+  utterance.onend = () => hideTTSStatus();
+  utterance.onerror = (e) => {
+    showTTSStatus(`Voice error: ${e.error}`, 'error');
+    ttsDisabled = true;
+  };
+
+  return utterance;
+}
+
+
+    // Display Quote
     function displayQuote(quote) {
       const quoteCard = document.getElementById('quoteCard');
       const quoteText = document.getElementById('quoteText');
@@ -1132,31 +1101,9 @@
 
       document.body.className = quote.theme || "theme-wat-pra-kew";
       quoteCard.style.display = 'block';
-      quoteCard.classList.remove('hiding');
       setTimeout(() => {
         quoteCard.classList.add('show');
       }, 100);
-
-      // Auto-hide after 30 seconds
-      if (autoHideTimer) clearTimeout(autoHideTimer); // Clear any existing timer
-      autoHideTimer = setTimeout(() => {
-        quoteCard.classList.add('hiding');
-        setTimeout(() => {
-          quoteCard.classList.remove('show');
-          quoteCard.style.display = 'none';
-          quoteCard.classList.remove('hiding');
-        }, 500); // Matches the CSS transition duration
-      }, 30000); // 30 seconds
-    }
-
-    // Optionally clear auto-hide timer on user interaction
-    function setupCardInteractions() {
-      const quoteCard = document.getElementById('quoteCard');
-      quoteCard.addEventListener('click', () => {
-        if (autoHideTimer) {
-          clearTimeout(autoHideTimer); // Stop auto-hide if user interacts with the card
-        }
-      });
     }
 
     // Toggle Explanation
@@ -1173,7 +1120,6 @@
       const quoteCard = document.getElementById('quoteCard');
       quoteCard.classList.remove('show');
       quoteCard.style.display = 'none';
-      if (autoHideTimer) clearTimeout(autoHideTimer);
     }
 
     // Generate Passage
@@ -1210,22 +1156,141 @@
       isGenerating = false;
     }
 
-    // Blessing of the Day
-    function updateBlessingOfDay() {
-      const today = new Date().toISOString().split('T')[0];
-      const lastBlessing = localStorage.getItem('lastBlessingOfDay');
-      const blessingOfDayEl = document.getElementById('blessingOfDay');
-      const blessingOfDayText = document.getElementById('blessingOfDayText');
-      const blessingOfDayEnglish = document.getElementById('blessingOfDayEnglish');
+    // Auto-hide timer variable to manage clearing if needed
+let autoHideTimer = null;
 
-      if (!lastBlessing || lastBlessing !== today) {
-        const randomBlessing = blessingsOfDay[Math.floor(Math.random() * blessingsOfDay.length)];
-        blessingOfDayText.textContent = `Blessing of the Day: "${randomBlessing.thai}"`;
-        blessingOfDayEnglish.textContent = `(${randomBlessing.english}) — ${randomBlessing.source}`;
-        localStorage.setItem('lastBlessingOfDay', today);
-        blessingOfDayEl.classList.add('show');
-      }
+// Display Quote with Auto-Hide
+function displayQuote(quote) {
+  const quoteCard = document.getElementById('quoteCard');
+  const quoteText = document.getElementById('quoteText');
+  const englishReading = document.getElementById('englishReading');
+  const quoteSource = document.getElementById('quoteSource');
+  const quoteImage = document.getElementById('quoteImage');
+
+  quoteText.innerHTML = `<span class="pali-text">${quote.text}</span>`;
+  englishReading.textContent = quote.englishReading || "";
+  quoteSource.textContent = `— ${quote.source}`;
+  quoteImage.src = templeImages[Math.floor(Math.random() * templeImages.length)];
+  quoteImage.alt = "Thai Temple";
+  quoteImage.style.display = "block";
+
+  document.body.className = quote.theme || "theme-wat-pra-kew";
+  quoteCard.style.display = 'block';
+  quoteCard.classList.remove('hiding');
+  setTimeout(() => {
+    quoteCard.classList.add('show');
+  }, 100);
+
+  // Auto-hide after 30 seconds
+  if (autoHideTimer) clearTimeout(autoHideTimer); // Clear any existing timer
+  autoHideTimer = setTimeout(() => {
+    quoteCard.classList.add('hiding');
+    setTimeout(() => {
+      quoteCard.classList.remove('show');
+      quoteCard.style.display = 'none';
+      quoteCard.classList.remove('hiding');
+    }, 500); // Matches the CSS transition duration
+  }, 30000); // 30 seconds
+}
+
+// Optionally clear auto-hide timer on user interaction (e.g., clicking any button in the card)
+function setupCardInteractions() {
+  const quoteCard = document.getElementById('quoteCard');
+  quoteCard.addEventListener('click', () => {
+    if (autoHideTimer) {
+      clearTimeout(autoHideTimer); // Stop auto-hide if user interacts with the card
     }
+  });
+}
+
+// Update the initialization to include interaction listener
+window.addEventListener('DOMContentLoaded', () => {
+  updateBlessingOfDay();
+  document.getElementById('themeSelector').value = localStorage.getItem('selectedTheme') || 'theme-wat-pra-kew';
+  document.body.className = document.getElementById('themeSelector').value;
+
+  // Existing event listeners...
+  document.getElementById('themeSelector').addEventListener('change', (e) => {
+    document.body.className = e.target.value;
+    localStorage.setItem('selectedTheme', e.target.value);
+  });
+
+  document.getElementById('starButton').addEventListener('click', generatePassage);
+  document.getElementById('playBtn').addEventListener('click', () => {
+    if (currentQuote) enhancedTTS(currentQuote.text, true, document.getElementById('ttsLanguage').value);
+  });
+  document.getElementById('blessingBtn').addEventListener('click', () => {
+    if (currentQuote) {
+      createMandalaAnimation(document.body.className);
+      showNotification("🙏🏻 Blessing sent!");
+    }
+  });
+  document.getElementById('favoriteBtn').addEventListener('click', () => {
+    if (!currentQuote) return;
+    const isFavorited = favorites.some(fav => fav.id === currentQuote.id);
+    if (isFavorited) {
+      favorites = favorites.filter(fav => fav.id !== currentQuote.id);
+      showNotification('Removed from favorites');
+    } else {
+      favorites.push(currentQuote);
+      showNotification('Added to favorites! ❤️');
+    }
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  });
+  document.getElementById('shareBtn').addEventListener('click', () => {
+    if (!currentQuote) return;
+    const textToShare = currentQuote.text + "\n— " + currentQuote.source;
+    if (navigator.share) {
+      navigator.share({ text: textToShare }).catch(console.error);
+    } else {
+      showNotification("Share not supported. Copy and share manually.");
+    }
+  });
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    if (!currentQuote) return;
+    const textToCopy = currentQuote.text + "\n— " + currentQuote.source;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      showNotification("Blessing copied to clipboard! 📋");
+    });
+  });
+  document.getElementById('closeCard').addEventListener('click', closeQuoteCard);
+  document.getElementById('explanationToggle').addEventListener('click', toggleExplanation);
+
+  // Add interaction listener to prevent auto-hide on click
+  setupCardInteractions();
+
+  // Show initial explanation
+  toggleExplanation();
+
+  // Show welcome message
+  showNotification('🙏🏻 Welcome to Blessing of Siam! Click ☀️ to start 🙏🏻');
+
+  // Load voices early
+  if (window.speechSynthesis) {
+    window.speechSynthesis.onvoiceschanged = () => {
+      console.log("Voices loaded:", window.speechSynthesis.getVoices());
+    };
+    window.speechSynthesis.getVoices(); // Trigger voice loading
+  }
+});
+
+    // Blessing of the Day
+function updateBlessingOfDay() {
+  const today = new Date().toISOString().split('T')[0];
+  const lastBlessing = localStorage.getItem('lastBlessingOfDay');
+  const blessingOfDayEl = document.getElementById('blessingOfDay');
+  const blessingOfDayText = document.getElementById('blessingOfDayText');
+  const blessingOfDayEnglish = document.getElementById('blessingOfDayEnglish');
+
+  if (!lastBlessing || lastBlessing !== today) {
+    const randomBlessing = blessingsOfDay[Math.floor(Math.random() * blessingsOfDay.length)];
+    blessingOfDayText.textContent = `Blessing of the Day: "${randomBlessing.thai}"`;
+    blessingOfDayEnglish.textContent = `(${randomBlessing.english}) — ${randomBlessing.source}`;
+    localStorage.setItem('lastBlessingOfDay', today);
+    blessingOfDayEl.classList.add('show');
+  }
+}
+
 
     // Initialize App
     window.addEventListener('DOMContentLoaded', () => {
@@ -1239,10 +1304,6 @@
       });
 
       document.getElementById('starButton').addEventListener('click', generatePassage);
-      document.querySelector('.generate-container').addEventListener('keydown', (e) => {
-        if (e.key === "Enter" || e.key === " ") generatePassage();
-      });
-
       document.getElementById('playBtn').addEventListener('click', () => {
         if (currentQuote) enhancedTTS(currentQuote.text, true, document.getElementById('ttsLanguage').value);
       });
@@ -1252,6 +1313,107 @@
           showNotification("🙏🏻 Blessing sent!");
         }
       });
+      
+  // Random Thai Temple Images (with fallback)
+  const templeImages = [
+    "https://images.unsplash.com/photo-1600703050964-1d6327353db7?auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1584459443767-905a40096dbd?auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1611974589080-f69b6a693652?auto=format&fit=crop&w=800&q=60",
+    "https://via.placeholder.com/600x400?text=Thai+Temple+Image"
+  ];
+
+  // Daily Blessings
+  let blessingsOfDay = [
+    {
+      id: 654,
+      thai: "จงใช้ชีวิตในปัจจุบันอย่างมีสติและปัญญา",
+      english: "Live in the present moment wisely.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 655,
+      thai: "วิปัสสนาหมายถึง 'การมองเห็นสิ่งต่างๆ ตามความเป็นจริง' ไม่ใช่ตามที่มันดูเหมือนจะเป็น",
+      english: "Vipassana means 'to see things as they really are', not as they appear to be.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 656,
+      thai: "ทุกความรู้สึกเกิดขึ้นเพื่อดับไป ไม่มีสิ่งใดถาวร นี่คือกฎแห่งอนิจจัง",
+      english: "Every sensation arises to pass away. Nothing is eternal. This is the law of impermanence.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 657,
+      thai: "รากเหง้าของความทุกข์คือความอยากและความเกลียดชัง กำจัดมันเสีย และคุณจะกำจัดความทุกข์ได้",
+      english: "The root of suffering is craving and aversion. Eradicate them, and you eradicate suffering.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 658,
+      thai: "ทำงานอย่างขยันหมั่นเพียร ทำงานอย่างอดทน ทำงานอย่างต่อเนื่อง คุณจะต้องประสบความสำเร็จแน่นอน",
+      english: "Work diligently. Work patiently. Work persistently. You are bound to be successful.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 659,
+      thai: "ธรรมะไม่ใช่ปรัชญา ธรรมะเป็นวิธีปฏิบัติเพื่อใช้ชีวิตอย่างมีความสุข",
+      english: "Dhamma is not a philosophy. Dhamma is a practical way of living a happy life.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 660,
+      thai: "เมื่อคุณนั่งสมาธิ อย่าคาดหวังอะไร อย่าปรารถนาอะไร อย่าปฏิเสธอะไร",
+      english: "When you meditate, don't expect anything, don't crave for anything, don't reject anything.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 661,
+      thai: "จักรวาลทั้งหมดเป็นเพียงการสั่นสะเทือน เกิดขึ้นและดับไป",
+      english: "The entire universe is nothing but vibration, arising and passing.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 662,
+      thai: "ลมหายใจของคุณคือสะพานเชื่อมระหว่างจิตสำนึกและจิตไร้สำนึก",
+      english: "Your breath is the bridge between the conscious and unconscious mind.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 663,
+      thai: "การหลุดพ้นเป็นไปได้ที่นี่และเดี๋ยวนี้ ไม่ใช่ในสวรรค์ที่จินตนาการขึ้น",
+      english: "Liberation is possible here and now, not in some imaginary heaven.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 664,
+      thai: "จิตที่บริสุทธิ์เต็มไปด้วยความรัก—ความรักต่อทุกสรรพสิ่งโดยไม่เลือกปฏิบัติ",
+      english: "A pure mind is full of love—love for all beings without discrimination.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 665,
+      thai: "จิตใจเหมือนเด็กที่ถูกตามใจ—ยิ่งคุณตามใจมันมากเท่าไหร่ มันยิ่งเรียกร้องมากขึ้นเท่านั้น",
+      english: "The mind is like a spoiled child—the more you pamper it, the more it demands.",
+      source: "S.N. Goenka"
+    }
+  ];
+
+  // Blessing of the Day
+  function updateBlessingOfDay() {
+    const today = new Date().toISOString().split('T')[0];
+    const lastBlessing = localStorage.getItem('lastBlessingOfDay');
+    const blessingOfDayEl = document.getElementById('blessingOfDay');
+    const blessingOfDayText = document.getElementById('blessingOfDayText');
+    const blessingOfDayEnglish = document.getElementById('blessingOfDayEnglish');
+
+    if (!lastBlessing || lastBlessing !== today) {
+      const randomBlessing = blessingsOfDay[Math.floor(Math.random() * blessingsOfDay.length)];
+      blessingOfDayText.textContent = `Blessing of the Day: "${randomBlessing.thai}"`;
+      blessingOfDayEnglish.textContent = `(${randomBlessing.english}) — ${randomBlessing.source}`;
+      localStorage.setItem('lastBlessingOfDay', today);
+      blessingOfDayEl.classList.add('show');
+    }
+  }
       document.getElementById('favoriteBtn').addEventListener('click', () => {
         if (!currentQuote) return;
         const isFavorited = favorites.some(fav => fav.id === currentQuote.id);
@@ -1283,9 +1445,6 @@
       document.getElementById('closeCard').addEventListener('click', closeQuoteCard);
       document.getElementById('explanationToggle').addEventListener('click', toggleExplanation);
 
-      // Add interaction listener to prevent auto-hide on click
-      setupCardInteractions();
-
       // Show initial explanation
       toggleExplanation();
 
@@ -1299,11 +1458,7 @@
         };
         window.speechSynthesis.getVoices(); // Trigger voice loading
       }
-
-      // Generate a blessing on load
-      generatePassage();
     });
   </script>
 </body>
 </html>
-
