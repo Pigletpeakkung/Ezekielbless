@@ -1,11 +1,28 @@
-# Python
-venv/
-__pycache__/
-*.pyc
-
-# Environment
-.env
-secrets.json
-
-# Data
-/quotes/local_*.json
+{
+  "name": "Blessing of Siam",
+  "description": "A spiritual and meditative web app with Thai Buddhist passages, mandala animations, and TTS.",
+  "version": "1.0.0",
+  "author": "Your Name",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/blessing-of-siam.git"
+  },
+  "keywords": [
+    "buddhism",
+    "thai",
+    "pali",
+    "mandala",
+    "tts",
+    "spiritual",
+    "meditation",
+    "web-app"
+  ],
+  "license": "MIT",
+  "main": "index.html",
+  "scripts": {
+    "start": "open index.html",
+    "deploy": "echo 'Deploy instructions here'"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
