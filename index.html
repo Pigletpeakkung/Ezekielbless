@@ -1,64 +1,735 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Receive divine wisdom from multiple spiritual traditions with interactive sacred cross">
-    <meta name="keywords" content="wisdom, quotes, spiritual, multi-faith, inspiration">
-    <title>Universal Wisdom Cross</title>
-    
-    <!-- CSS with CDN and fallback -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Pigletpeakkung/Ezekielbless@main/css/styles.css">
-    <noscript>
-        <link rel="stylesheet" href="css/styles.css">
-    </noscript>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blessing of Siam</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans Thai', sans-serif;
+      background: linear-gradient(135deg, #ffffff 0%, #8b0000 100%);
+      color: #000;
+      transition: background 0.5s, color 0.5s;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Temple-Specific Themes */
+    .theme-wat-pra-kew {
+      background: linear-gradient(135deg, #87ceeb 0%, #0066cc 100%);
+      color: #000;
+    }
+    .theme-wat-po {
+      background: linear-gradient(135deg, #d2b48c 0%, #8b4513 100%);
+      color: #000;
+    }
+    .theme-wat-benchamabophit {
+      background: linear-gradient(135deg, #ffffff 0%, #8b0000 100%);
+      color: #000;
+    }
+    .theme-wat-phra-singh {
+      background: linear-gradient(135deg, #ffd700 0%, #8b0000 100%);
+      color: #000;
+    }
+    .theme-wat-phnom-penh {
+      background: linear-gradient(135deg, #008000 0%, #000080 100%);
+      color: #fff;
+    }
+    .theme-wat-suthat {
+      background: linear-gradient(135deg, #8b0000 0%, #008000 100%);
+      color: #fff;
+    }
+    .theme-wat-arun {
+      background: linear-gradient(135deg, #0066cc 0%, #ffffff 100%);
+      color: #000;
+    }
+    .theme-wat-chedi-luang {
+      background: linear-gradient(135deg, #8b0000 0%, #8b4513 100%);
+      color: #fff;
+    }
+    .theme-wat-traimit {
+      background: linear-gradient(135deg, #006600 0%, #8b0000 100%);
+      color: #fff;
+    }
+
+    /* Quote Card */
+    .quote-card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      max-width: 90%;
+      width: 600px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      display: none;
+      text-align: center;
+      font-size: 1.1em;
+      transition: all 0.5s ease;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .quote-card.show {
+      display: block;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -100%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    .pali-text {
+      font-family: 'Noto Sans Thai', sans-serif;
+      font-size: 1.4em;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .cc-text {
+      font-size: 0.95em;
+      color: #555;
+      font-style: italic;
+      margin: 15px 0;
+      opacity: 0.85;
+    }
+
+    .quote-source {
+      font-size: 1em;
+      margin-top: 20px;
+      color: #888;
+    }
+
+    .quote-actions {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .action-btn {
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .blessing-btn {
+      background: linear-gradient(135deg, #ffffff 0%, #8b0000 100%);
+      color: #000;
+    }
+
+    .favorite-btn.favorited {
+      background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+    }
+
+    .secondary-btn {
+      background: #f0f0f0;
+      color: #333;
+      border: 1px solid #ccc;
+    }
+
+    .tts-status {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 25px;
+      z-index: 1000;
+      display: none;
+      font-size: 0.9em;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 25px;
+      z-index: 1000;
+      display: none;
+      font-size: 0.9em;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Mandala Animation */
+    .mandala {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+      animation: mandalaPulse 3s ease-out forwards;
+      opacity: 0.4;
+    }
+
+    @keyframes mandalaPulse {
+      0% {
+        transform: scale(0.1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.5);
+        opacity: 0.2;
+      }
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+    .mandala::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle at 50% 50%, #ffd700 0%, transparent 70%);
+      border-radius: 50%;
+      box-shadow: 0 0 20px #ffd70080;
+      animation: mandalaCenter 2s infinite;
+    }
+
+    @keyframes mandalaCenter {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 20px #ffd70080;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        box-shadow: 0 0 30px #ffd70080;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 20px #ffd70080;
+      }
+    }
+
+    /* Controls */
+    .controls {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      z-index: 998;
+    }
+
+    .theme-selector, .source-filter {
+      padding: 10px;
+      border-radius: 15px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      min-width: 180px;
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Mobile Floating Button */
+    @media (max-width: 600px) {
+      .blessing-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        animation: floatIn 0.5s ease-out;
+      }
+
+      @keyframes floatIn {
+        from { transform: translateY(30px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="glow-overlay" id="glowOverlay" aria-hidden="true"></div>
-    
-    <main class="container">
-        <button class="sacred-cross" id="wisdomCross" aria-label="Fetch wisdom">
-            <span class="sr-only">Sacred Cross Button</span>
-            <div class="cross-bar vertical" aria-hidden="true"></div>
-            <div class="cross-bar horizontal" aria-hidden="true"></div>
-        </button>
-        
-        <section class="wisdom-display" id="wisdomDisplay" aria-live="polite">
-            <blockquote class="quote" id="quoteText"></blockquote>
-            <cite class="source" id="quoteSource"></cite>
-            <p class="prompt" id="promptText"></p>
-            <p class="error-message" id="errorMessage" role="alert"></p>
-        </section>
+  <div class="controls">
+    <select class="theme-selector" id="themeSelector">
+      <option value="theme-wat-pra-kew">Wat Pra Kew</option>
+      <option value="theme-wat-po">Wat Po</option>
+      <option value="theme-wat-benchamabophit">Wat Benchamabophit</option>
+      <option value="theme-wat-phra-singh">Wat Phra Singh</option>
+      <option value="theme-wat-phnom-penh">Wat Phnom Penh</option>
+      <option value="theme-wat-suthat">Wat Suthat</option>
+      <option value="theme-wat-arun">Wat Arun</option>
+      <option value="theme-wat-chedi-luang">Wat Chedi Luang</option>
+      <option value="theme-wat-traimit">Wat Traimit</option>
+    </select>
 
-        <nav class="controls" aria-label="Application controls">
-            <button id="dailyWisdom" aria-label="Get daily wisdom">
-                <span aria-hidden="true">📅</span> <span class="btn-text">Daily Wisdom</span>
-            </button>
-            <button id="themeToggle" aria-label="Toggle dark mode">
-                <span aria-hidden="true">🌓</span> <span class="btn-text">Toggle Theme</span>
-            </button>
-            <button id="speakQuote" disabled aria-label="Speak current quote">
-                <span aria-hidden="true">🔊</span> <span class="btn-text">Speak Quote</span>
-            </button>
-            <button id="changeTradition" aria-label="Change spiritual tradition">
-                <span aria-hidden="true">🔄</span> <span class="btn-text">Change Tradition</span>
-            </button>
-        </nav>
-    </main>
+    <select class="source-filter" id="sourceFilter">
+      <option value="all">All Sources</option>
+      <option value="Buddhism">Buddhism</option>
+      <option value="Wat Pra Kew">Wat Pra Kew</option>
+      <option value="Wat Po">Wat Po</option>
+      <option value="Wat Benchamabophit">Wat Benchamabophit</option>
+      <option value="Wat Phra Singh">Wat Phra Singh</option>
+      <option value="Wat Phnom Penh">Wat Phnom Penh</option>
+      <option value="Wat Suthat">Wat Suthat</option>
+      <option value="Wat Arun">Wat Arun</option>
+      <option value="Wat Chedi Luang">Wat Chedi Luang</option>
+      <option value="Wat Traimit">Wat Traimit</option>
+    </select>
 
-    <!-- GSAP with fallback -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" 
-            integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" 
-            crossorigin="anonymous">
-    </script>
-    <script>
-        window.gsap || document.write('<script src="js/gsap.min.js"><\/script>');
-    </script>
+    <select class="source-filter" id="ttsLanguage">
+      <option value="th-TH">Pali (Thai)</option>
+      <option value="en-US">English</option>
+    </select>
+  </div>
 
-    <!-- Local scripts -->
-    <script src="js/sacred-geometry.js"></script>
-    <script src="js/tts.js"></script>
-    <script src="js/main.js"></script>
+  <div class="quote-card" id="quoteCard">
+    <div class="quote-text pali-text" id="quoteText"></div>
+    <div class="cc-text" id="ccText"></div>
+    <div class="quote-source" id="quoteSource"></div>
+    <div class="quote-actions">
+      <button class="action-btn blessing-btn" id="blessingBtn" onclick="sendBlessing()">🙏🏻 Send Blessing</button>
+      <button class="action-btn secondary-btn" id="wwbappsBtn" onclick="playWWBAppsTTS()">🙏🏻 wwbapps</button>
+      <button class="action-btn secondary-btn" id="playBtn" onclick="playTTS()">🔊 Listen</button>
+      <button class="action-btn secondary-btn" id="favoriteBtn" onclick="toggleFavorite()">❤️ Save</button>
+      <button class="action-btn secondary-btn" id="shareBtn" onclick="shareQuote()">📤 Share</button>
+      <button class="action-btn secondary-btn" id="copyBtn" onclick="copyQuote()">📋 Copy</button>
+    </div>
+  </div>
+
+  <div class="notification" id="ttsStatus"></div>
+  <div class="notification" id="notification"></div>
+
+  <script>
+    // Extended Pali/Thai passages with English captions and temple associations
+    let passages = [
+      {
+        text: "อิติปิโส ภะคะวา อะระหัง สัมมา สัมพุทโธ วิชชาจะระณะสัมปันโน สุคะโต โลกะวิทู อะนุตตะโร ปุริสะทัมมะสาระถิ สัตถา เทวะมะนุสสานัง พุทโธ ภะคะวาติ สะวากขาโต ภะคะวะตา ธัมโม สันทิฏฐิโก อะกาลิโก เอหิปัสสิโก โอปะนะยิโก ปัจจัตตัง เวทิตัพโพ วิญญูหิติ",
+        englishTranslation: "This is the teaching of the Buddha, the Arahant, the Fully Self-Enlightened One, the Knower of the World, the Unexcelled Teacher of Devas and Humans, the Buddha, the Lord, the Dhamma well-expounded, the Dhamma unimpeachable, the Dhamma pure, the Dhamma independent, the Dhamma to be seen for oneself, the Dhamma to be known for oneself, the Dhamma to be reached by oneself. All conditioned things are impermanent, all conditioned things are suffering, all conditioned things are not self. This is the end of suffering.",
+        temple: "Wat Pra Kew",
+        id: 1,
+        source: "Buddhism"
+      },
+      {
+        text: "นะโม ตัสสะ ภะคะวะโต วิชชาจะระณะสัมปันโน สุคะโต โลกะวิทู อะนุตตะโร ปุริสะทัมมะสาระถิ สัตถา เทวะมะนุสสานัง พุทโธ ภะคะวาติ สะวากขาโต ภะคะวะตา ธัมโม สันทิฏฐิโก อะกาลิโก เอหิปัสสิโก โอปะนะยิโก ปัจจัตตัง เวทิตัพโพ วิญญูหิติ",
+        englishTranslation: "I go for refuge to the Buddha, the Dhamma, and the Sangha. The Buddha is the one who has awakened, the Dhamma is the path, and the Sangha is the community of monks.",
+        temple: "Wat Po",
+        id: 2,
+        source: "Buddhism"
+      },
+      {
+        text: "กุสะลา ธัมมา อะกุสะลา ธัมมา อัพยากะตา ธัมมา ฯ",
+        englishTranslation: "Wholesome Dhamma is wholesome, unwholesome Dhamma is unwholesome, and neutral Dhamma is neither wholesome nor unwholesome.",
+        temple: "Wat Benchamabophit",
+        id: 3,
+        source: "Buddhism"
+      },
+      {
+        text: "สุขายะ เวทะนายะ สัมปะยุตตา ธัมมา ทุกขายะ เวทะนายะ สัมปะยุตตา ธัมมา อุเปกขาสะหะคะตา ธัมมา ฯ",
+        englishTranslation: "Dhamma with joy is joyful, Dhamma with sorrow is sorrowful, and Dhamma with equanimity is equanimous.",
+        temple: "Wat Phra Singh",
+        id: 4,
+        source: "Buddhism"
+      },
+      {
+        text: "วิปากา ธัมมา วิปากะธัมมะธัมมา เนวะวิปากะนะวิปากะธัมมะธัมมา ฯ",
+        englishTranslation: "Dhamma with discernment is discerning, Dhamma without discernment is non-discriminating, and Dhamma that is neither discerning nor non-discriminating is neutral.",
+        temple: "Wat Phnom Penh",
+        id: 5,
+        source: "Buddhism"
+      },
+      {
+        text: "อุปาทินนุปาทานิยา ธัมมา อะนุปาทินนุปาทานิยา ธัมมา อะนุปาทินนุปาทานิยา ธัมมา ฯ",
+        englishTranslation: "Dhamma with attachment is attached, Dhamma without attachment is non-attached, and Dhamma that is neither attached nor non-attached is neutral.",
+        temple: "Wat Suthat",
+        id: 6,
+        source: "Buddhism"
+      },
+      {
+        text: "สังกิลิฏฐะสังกิเลสิกา ธัมมา อะสังกิลิฏฐะสังกิเลสิกา ธัมมา อะสังกิลิฏฐาสังกิเลสิกาธัมมาฯ",
+        englishTranslation: "Dhamma with moral virtue is virtuous, Dhamma without moral virtue is non-virtuous, and Dhamma that is neither virtuous nor non-virtuous is neutral.",
+        temple: "Wat Arun",
+        id: 7,
+        source: "Buddhism"
+      },
+      {
+        text: "สะวิตักกะสะวิจารา ธัมมา อะวิตักกะวิจาระมัตตา ธัมมา อะวิตักกาวิจารา ธัมมา ฯ",
+        englishTranslation: "Dhamma with thought is thoughtful, Dhamma without thought is non-thoughtful, and Dhamma that is neither thoughtful nor non-thoughtful is neutral.",
+        temple: "Wat Chedi Luang",
+        id: 8,
+        source: "Buddhism"
+      },
+      {
+        text: "ปีติสะหะคะตา ธัมมา สุขะสะหะคะตา ธัมมา อุเปกขาสะหะคะตา ธัมมา ฯ",
+        englishTranslation: "Dhamma with joy is joyful, Dhamma with happiness is happy, and Dhamma with equanimity is equanimous.",
+        temple: "Wat Traimit",
+        id: 9,
+        source: "Buddhism"
+      }
+    ];
+
+    // State management
+    let usedPassages = JSON.parse(localStorage.getItem('usedPassages')) || [];
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    let quotesRead = parseInt(localStorage.getItem('quotesRead')) || 0;
+    let currentQuote = null;
+    let isGenerating = false;
+    let currentUtterance = null;
+
+    // Create mandala animation
+    function createMandalaAnimation(templeTheme) {
+      const mandala = document.createElement('div');
+      mandala.className = 'mandala';
+
+      // Set mandala color based on temple
+      switch (templeTheme) {
+        case 'theme-wat-pra-kew':
+          mandala.style.background = 'radial-gradient(circle at 50% 50%, #87ceeb 0%, transparent 70%)';
+          mandala.style.boxShadow = '0 0 20px #87ceeb80';
+          break;
+        case 'theme-wat-po':
+          mandala.style.background = 'radial-gradient(circle at 50% 50%, #d2b48c 0%, transparent 70%)';
+          mandala.style.boxShadow = '0 0 20px #d2b48c80';
+          break;
+        case 'theme-wat-benchamabophit':
+          mandala.style.background = 'radial-gradient(circle at 50% 50%, #ffffff 0%, transparent 70%)';
+          mandala.style.boxShadow = '0 0 20px #8b000080';
+          break;
+        default:
+          mandala.style.background = 'radial-gradient(circle at 50% 50%, #ffd700 0%, transparent 70%)';
+          mandala.style.boxShadow = '0 0 20px #ffd70080';
+          break;
+      }
+
+      document.body.appendChild(mandala);
+
+      setTimeout(() => {
+        if (document.body.contains(mandala)) {
+          document.body.removeChild(mandala);
+        }
+      }, 3000);
+    }
+
+    // Enhanced TTS with language detection
+    function enhancedTTS(text, autoPlay = false, lang = 'en-US') {
+      if (!window.speechSynthesis) {
+        showTTSStatus('TTS not supported', 'error');
+        return null;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = lang;
+      utterance.rate = lang === 'th-TH' ? 0.6 : 0.75;
+      utterance.pitch = 0.9;
+      utterance.volume = 1.0;
+
+      const voices = window.speechSynthesis.getVoices();
+      const preferredVoice = voices.find(voice => 
+        voice.lang === lang && 
+        (voice.name.includes('Google') || voice.name.includes('Microsoft') || voice.name.includes('Natural'))
+      ) || voices.find(voice => voice.lang === lang) || voices[0];
+
+      utterance.voice = preferredVoice;
+
+      utterance.onstart = () => {
+        showTTSStatus(`🔊 Speaking in ${lang === 'th-TH' ? 'Pali (Thai)' : 'English'}...`, 'speaking');
+      };
+
+      utterance.onend = () => {
+        hideTTSStatus();
+        currentUtterance = null;
+      };
+
+      utterance.onerror = (event) => {
+        console.error("TTS error:", event.error);
+        showTTSStatus(`Voice error: ${event.error}`, 'error');
+        currentUtterance = null;
+      };
+
+      currentUtterance = utterance;
+
+      if (autoPlay) {
+        setTimeout(() => {
+          try {
+            window.speechSynthesis.speak(utterance);
+          } catch (error) {
+            console.error("Failed to start TTS:", error);
+            showTTSStatus('Failed to start voice', 'error');
+          }
+        }, 100);
+      }
+
+      return utterance;
+    }
+
+    // Display a quote in the card
+    function displayQuote(quote) {
+      const quoteCard = document.getElementById('quoteCard');
+      const quoteText = document.getElementById('quoteText');
+      const ccText = document.getElementById('ccText');
+      const quoteSource = document.getElementById('quoteSource');
+
+      quoteText.innerHTML = `<span class="pali-text">${quote.text}</span>`;
+      ccText.textContent = quote.englishTranslation;
+      quoteSource.textContent = `— ${quote.source} (${quote.temple})`;
+
+      // Apply temple-specific theme
+      document.body.className = `theme-${quote.temple.toLowerCase().replace(/\s+/g, '-')}`;
+
+      // Show quote card
+      quoteCard.style.display = 'block';
+      setTimeout(() => {
+        quoteCard.classList.add('show');
+      }, 100);
+
+      updateFavoriteButton();
+      updateStats();
+    }
+
+    // Toggle favorites
+    function toggleFavorite(quote) {
+      const existingIndex = favorites.findIndex(fav => fav.id === quote.id);
+      const isFavorited = existingIndex !== -1;
+
+      if (isFavorited) {
+        favorites.splice(existingIndex, 1);
+        showNotification('Removed from favorites');
+      } else {
+        favorites.push(quote);
+        showNotification('Added to favorites! ❤️');
+      }
+
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      updateFavoriteButton();
+    }
+
+    // Update favorite button state
+    function updateFavoriteButton() {
+      const favoriteBtn = document.getElementById('favoriteBtn');
+      if (currentQuote) {
+        const isFavorited = favorites.some(fav => fav.id === currentQuote.id);
+        favoriteBtn.textContent = isFavorited ? '💖 Saved' : '❤️ Save';
+        favoriteBtn.classList.toggle('favorited', isFavorited);
+      }
+    }
+
+    // Send Blessing
+    function sendBlessing() {
+      if (!currentQuote) {
+        showNotification("Please select a passage to send a blessing.");
+        return;
+      }
+
+      createMandalaAnimation(document.body.className);
+      showNotification(`🙏🏻 Your blessing for "${currentQuote.temple}" has been sent!`);
+
+      console.log("Blessing sent for:", {
+        temple: currentQuote.temple,
+        pali: currentQuote.text,
+        english: currentQuote.englishTranslation
+      });
+    }
+
+    // Play TTS
+    function playTTS() {
+      if (!currentQuote) {
+        showNotification("Please select a passage first.");
+        return;
+      }
+
+      const ttsLanguage = document.getElementById('ttsLanguage').value;
+      const textToSpeak = ttsLanguage === 'th-TH' ? currentQuote.text : currentQuote.englishTranslation;
+      enhancedTTS(textToSpeak, true, ttsLanguage);
+    }
+
+    // Play wwbapps TTS with mandala
+    function playWWBAppsTTS() {
+      if (!currentQuote) {
+        showNotification("Please select a passage first.");
+        return;
+      }
+
+      const ttsLanguage = document.getElementById('ttsLanguage').value;
+      const textToSpeak = ttsLanguage === 'th-TH' ? currentQuote.text : currentQuote.englishTranslation;
+
+      // Trigger mandala animation
+      createMandalaAnimation(document.body.className);
+
+      // Play TTS
+      enhancedTTS(textToSpeak, true, ttsLanguage);
+    }
+
+    // Generate a new passage
+    function generatePassage() {
+      if (isGenerating) return;
+      isGenerating = true;
+
+      const button = document.getElementById('starButton');
+      button.classList.add('splash');
+      createMandalaAnimation(document.body.className);
+
+      setTimeout(() => {
+        button.classList.remove('splash');
+        isGenerating = false;
+      }, 2000);
+
+      const sourceFilter = document.getElementById('sourceFilter').value;
+      const language = document.getElementById('ttsLanguage').value;
+
+      let availablePassages = sourceFilter === 'all' 
+        ? passages 
+        : passages.filter(p => p.source.includes(sourceFilter) || p.temple.includes(sourceFilter));
+
+      availablePassages = availablePassages.filter(p => !usedPassages.includes(p.id));
+
+      if (availablePassages.length === 0) {
+        usedPassages = [];
+        availablePassages = sourceFilter === 'all' ? passages : passages.filter(p => p.source.includes(sourceFilter) || p.temple.includes(sourceFilter));
+        localStorage.setItem('usedPassages', JSON.stringify(usedPassages));
+      }
+
+      const randomPassage = availablePassages[Math.floor(Math.random() * availablePassages.length)];
+      usedPassages.push(randomPassage.id);
+      localStorage.setItem('usedPassages', JSON.stringify(usedPassages));
+
+      quotesRead++;
+      localStorage.setItem('quotesRead', quotesRead.toString());
+
+      currentQuote = randomPassage;
+      displayQuote(randomPassage);
+    }
+
+    // Share quote
+    function shareQuote() {
+      if (!currentQuote) return;
+      const text = `"${currentQuote.text}" — ${currentQuote.source} (${currentQuote.temple})`;
+      if (navigator.share) {
+        navigator.share({
+          title: "Sacred Wisdom from Blessing of Siam",
+          text: text,
+          url: window.location.href
+        }).catch(err => {
+          console.error("Share failed:", err);
+          showNotification("Failed to share. Try copying the quote instead.");
+        });
+      } else {
+        showNotification("Sharing not supported. Copy the quote to share.");
+      }
+    }
+
+    // Copy quote
+    function copyQuote() {
+      if (!currentQuote) return;
+      const text = `"${currentQuote.text}" — ${currentQuote.source} (${currentQuote.temple})`;
+      navigator.clipboard.writeText(text).then(() => {
+        showNotification("Quote copied to clipboard! 📋");
+      }).catch(err => {
+        console.error("Copy failed:", err);
+        showNotification("Failed to copy quote.");
+      });
+    }
+
+    // Show notification
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.style.display = 'block';
+
+      setTimeout(() => {
+        if (document.body.contains(notification)) {
+          notification.style.display = 'none';
+        }
+      }, 3000);
+    }
+
+    // Show TTS status
+    function showTTSStatus(message, type = 'speaking') {
+      const statusEl = document.getElementById('ttsStatus');
+      statusEl.textContent = message;
+      statusEl.className = `tts-status ${type}`;
+      statusEl.style.display = 'block';
+
+      if (type === 'error') {
+        setTimeout(() => {
+          statusEl.style.display = 'none';
+        }, 3000);
+      }
+    }
+
+    function hideTTSStatus() {
+      const statusEl = document.getElementById('ttsStatus');
+      statusEl.style.display = 'none';
+    }
+
+    // Set theme
+    function setTheme(theme) {
+      document.body.className = theme;
+      localStorage.setItem('selectedTheme', theme);
+    }
+
+    // Initialize app
+    function initializeApp() {
+      const savedTheme = localStorage.getItem('selectedTheme') || 'theme-wat-pra-kew';
+      document.getElementById('themeSelector').value = savedTheme;
+      setTheme(savedTheme);
+
+      // Set event listeners
+      document.getElementById('starButton').addEventListener('click', generatePassage);
+      document.getElementById('playBtn').addEventListener('click', playTTS);
+      document.getElementById('wwbappsBtn').addEventListener('click', playWWBAppsTTS);
+      document.getElementById('favoriteBtn').addEventListener('click', () => {
+        if (currentQuote) toggleFavorite(currentQuote);
+      });
+      document.getElementById('shareBtn').addEventListener('click', () => {
+        if (currentQuote) shareQuote();
+      });
+      document.getElementById('copyBtn').addEventListener('click', () => {
+        if (currentQuote) copyQuote();
+      });
+      document.getElementById('themeSelector').addEventListener('change', (e) => {
+        setTheme(e.target.value);
+      });
+
+      // Initial notification
+      setTimeout(() => {
+        showNotification('🙏🏻 Welcome to Blessing of Siam! Click the star for sacred wisdom 🙏🏻');
+      }, 1500);
+    }
+
+    // Update stats
+    function updateStats() {
+      document.getElementById('totalQuotes').textContent = passages.length;
+      document.getElementById('quotesRead').textContent = quotesRead;
+      document.getElementById('favoriteCount').textContent = favorites.length;
+    }
+
+    // Load app on DOM ready
+    if (document.readyState === 'complete') {
+      initializeApp();
+    } else {
+      document.addEventListener('DOMContentLoaded', initializeApp);
+    }
+  </script>
 </body>
 </html>
