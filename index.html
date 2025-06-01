@@ -304,30 +304,41 @@
       text-decoration: underline;
     }
 
-    /* Blessing of the Day */
-    .blessing-of-day {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.9);
-      padding: 10px 20px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      z-index: 999;
-      display: none;
-      animation: fadeIn 0.5s ease-out;
-    }
+    /* Blessing of the Day - FIXED */
+.blessing-of-day {
+  position: fixed;
+  top: 80px; /* Changed from 20px to avoid controls */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1001; /* Higher z-index */
+  display: block; /* Changed from 'none' to 'block' */
+  animation: fadeIn 0.5s ease-out;
+  max-width: 90%;
+  text-align: center;
+}
 
-    .blessing-of-day.show {
-      display: block;
-    }
+.blessing-of-day.show {
+  display: block;
+  opacity: 1;
+}
 
-    .blessing-of-day .blessing-text {
-      font-size: 1em;
-      color: #8b0000;
-      font-weight: bold;
-    }
+.blessing-of-day .blessing-text {
+  font-size: 1em;
+  color: #8b0000;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.blessing-of-day .english-reading {
+  font-size: 0.85em;
+  color: #555;
+  font-style: italic;
+  margin: 0;
+}
 
     @keyframes fadeIn {
       0% { opacity: 0; }
@@ -1201,22 +1212,29 @@ const templeImages = [
       isGenerating = false;
     }
 
-    // Blessing of the Day
-    function updateBlessingOfDay() {
-      const today = new Date().toISOString().split('T')[0];
-      const lastBlessing = localStorage.getItem('lastBlessingOfDay');
-      const blessingOfDayEl = document.getElementById('blessingOfDay');
-      const blessingOfDayText = document.getElementById('blessingOfDayText');
-      const blessingOfDayEnglish = document.getElementById('blessingOfDayEnglish');
+// Blessing of the Day - FIXED
+function updateBlessingOfDay() {
+  const today = new Date().toISOString().split('T')[0];
+  const lastBlessing = localStorage.getItem('lastBlessingOfDay');
+  const blessingOfDayEl = document.getElementById('blessingOfDay');
+  const blessingOfDayText = document.getElementById('blessingOfDayText');
+  const blessingOfDayEnglish = document.getElementById('blessingOfDayEnglish');
 
-      if (!lastBlessing || lastBlessing !== today) {
-        const randomBlessing = blessingsOfDay[Math.floor(Math.random() * blessingsOfDay.length)];
-        blessingOfDayText.textContent = `Blessing of the Day: "${randomBlessing.thai}"`;
-        blessingOfDayEnglish.textContent = `(${randomBlessing.english}) — ${randomBlessing.source}`;
-        localStorage.setItem('lastBlessingOfDay', today);
-        blessingOfDayEl.classList.add('show');
-      }
-    }
+  // Always show a blessing (remove the date check for testing)
+  const randomBlessing = blessingsOfDay[Math.floor(Math.random() * blessingsOfDay.length)];
+  blessingOfDayText.textContent = `Daily Blessing: "${randomBlessing.thai}"`;
+  blessingOfDayEnglish.textContent = `${randomBlessing.english} — ${randomBlessing.source}`;
+  
+  // Show the element
+  blessingOfDayEl.style.display = 'block';
+  blessingOfDayEl.classList.add('show');
+  
+  // Save today's date
+  localStorage.setItem('lastBlessingOfDay', today);
+  
+  console.log("Daily blessing updated:", randomBlessing.thai); // Debug log
+}
+
 
     // Initialize App
     window.addEventListener('DOMContentLoaded', () => {
