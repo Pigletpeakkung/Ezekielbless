@@ -1,103 +1,97 @@
+# Blessing of Siam
 
-```markdown
-# 🌿 Universal Wisdom Cross
-
-[![GitHub Pages](https://img.shields.io/badge/Live-Demo-brightgreen)](https://pigletpeakkung.github.io/Ezekielbless/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-
-An interactive multi-faith wisdom tool featuring quotes from:
-- Christianity • Islam • Hinduism  
-- Buddhism • Taoism • Rumi  
-- Alan Watts • Conversations with God  
-- Seth Speaks • Law of One (Ra Material)
-
-![Wisdom Cross Screenshot](preview.png)
-
-## ✨ Features
-
-- **Sacred Geometry Animations**  
-  Tradition-specific visual effects (Flower of Life, Dharma Wheel, etc.)
-  
-- **Text-to-Speech**  
-  Hear wisdom quotes spoken aloud (browser-supported)
-
-- **Daily Wisdom Cycle**  
-  Automatically rotates through traditions
-
-- **Dark/Light Mode**  
-  Eye-friendly theme switching
-
-- **Cloudflare-Powered API**  
-  CORS-protected quote fetching
-
-## 🛠️ Setup
-
-### Local Development
-```bash
-git clone https://github.com/Pigletpeakkung/Ezekielbless.git
-cd Ezekielbless
-python -m http.server 8000
-```
-Open `http://localhost:8000`
-
-### Requirements
-- Python 3.10+ (for scraper)
-- Node.js 20+ (for Cloudflare Worker)
-
-## 📂 File Structure
-```
-Ezekielbless/
-├── index.html            # Main application
-├── css/
-│   └── styles.css        # All styles
-├── js/
-│   ├── main.js           # Core logic
-│   ├── sacred-geometry.js # Animations
-│   └── tts.js            # Speech synthesis
-├── quotes/               # Quote database
-├── scraper.py            # Web scraping tool
-└── worker.js             # Cloudflare Worker
-```
-
-## 🌐 Deployment
-1. **GitHub Pages**  
-   - Automatic via `main` branch
-
-2. **Cloudflare Worker**  
-   ```bash
-   npm install -g wrangler
-   wrangler publish
-   ```
-
-## 📜 Ethical Usage
-For copyrighted materials (CwG, Seth, Law of One):
-- Only includes short excerpts
-- Contains full attribution
-- Recommends purchasing original books
-
-## 🤝 Contributing
-1. Fork the repository
-2. Add new quotes to `/quotes`
-3. Submit a PR with:
-   - Source attribution
-   - ISBN/page references
-
-## 📄 License
-MIT © [Your Name]
+A spiritual and meditative web app that provides **Thai Buddhist passages**, complete with:
+- ✅ Thai Pali script and English translations.
+- ✅ Dynamic mandala animations.
+- ✅ Male TTS at 1.4 speed.
+- ✅ Temple-themed backgrounds.
+- ✅ Random blessing generator.
+- ✅ Favorite saving and sharing features.
 
 ---
-```
 
-### Key Sections Included:
-1. **Live Demo Badge** - Links to GitHub Pages
-2. **Visual Preview** - Add a `preview.png` screenshot
-3. **Setup Instructions** - Both local and cloud deployment
-4. **Ethical Guidelines** - For copyrighted materials
-5. **File Structure** - Clear directory overview
-6. **License Info** - MIT license recommended
+## 🌟 Features
 
-To add a screenshot:
-1. Take a screenshot of your project
-2. Save as `preview.png` in root
-3. Update the markdown image link if needed
+| Feature | Description |
+|--------|-------------|
+| ✅ 70+ Passages | Includes Thai Buddhist verses from the Three Jewels (Buddha, Dhamma, Sangha) and general blessings. |
+| ✅ Mandala Animation | A unique mandala appears every time you generate a new blessing. |
+| ✅ TTS Support | Text-to-speech in Thai (Pali/Devanagari) and English. |
+| ✅ Themed Backgrounds | Temple-specific themes (e.g., Wat Phra Kew, Wat Arun). |
+| ✅ Responsive Design | Works on desktop and mobile. |
+| ✅ Save & Share | Save favorite blessings and share them easily. |
 
+---
+
+## 🛠️ Technologies Used
+
+- **HTML5 / CSS3 / JavaScript**
+- **Web Speech API** for TTS
+- **LocalStorage** for favorites and progress
+- **Responsive Design** using Flexbox and media queries
+
+---
+
+## 🧪 How to Use
+
+1. Open the HTML file in any modern browser (Chrome, Firefox, Safari).
+2. Click the ☀️ button to generate a new blessing.
+3. Listen to it using the 🔊 button.
+4. View the English translation below the passage.
+5. Save your favorite blessings using ❤️.
+6. Share via 📤 or copy to clipboard with 📋.
+
+---
+
+## 🚀 Deployment
+
+You can deploy this app easily using:
+
+### Option 1: GitHub Pages
+1. Push the project to a GitHub repository.
+2. Go to **Settings > Pages** and select the branch to deploy.
+3. Your app will be live at `https://Pigletpeakkung.github.io/blessing-of-siam/`.
+
+### Option 2: Netlify/Vercel
+1. Drag and drop the folder into [Netlify](https://www.netlify.com/) or [Vercel](https://vercel.com/).
+2. Deploy instantly.
+
+### Option 3: Local Hosting
+1. Simply open the `index.html` file in your browser.
+
+---
+
+## 📁 Project Structure
+Blessing-of-Siam/ ├── index.html       # Main HTML file ├── README.md        # This file └── .giganor         # Configuration for GigaNOR
+
+---
+
+## 🧑‍💻 Contributing
+
+Contributions are welcome! If you'd like to add more passages, improve translations, or enhance the UI, feel free to fork the repo and submit a pull request.
+
+---
+
+## 🙏 Acknowledgments
+
+- Images from [Unsplash](https://unsplash.com/)
+- Fonts from [Google Fonts](https://fonts.google.com/)
+- Icons from [Font Awesome](https://fontawesome.com/)
+- TTS support via [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/Speech_API)
+
+---
+
+## 📬 Contact
+
+If you have questions or want to collaborate, reach out via:
+
+- **Portfolio:** [https://pigletpeakkung.github.io/Thannxai/](https://pigletpeakkung.github.io/Thannxai/)
+- **LinkedIn:** [https://www.linkedin.com/in/thanattsitts/](https://www.linkedin.com/in/thanattsitts/)
+- **GitHub:** [https://github.com/Pigletpeakkung](https://github.com/Pigletpeakkung)
+- **Linktree Hub:** [https://linktr.ee/ThanttEzekiel](https://linktr.ee/ThanttEzekiel)
+
+---
+
+## 📦 License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
