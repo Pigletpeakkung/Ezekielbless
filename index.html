@@ -122,28 +122,34 @@
     }
 
     /* Quote Card */
-    .quote-card {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      max-width: 90%;
-      width: 600px;
-      padding: 25px;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      display: none;
-      text-align: center;
-      font-size: 1.1em;
-      transition: all 0.5s ease;
-      z-index: 999;
-      animation: slideIn 0.5s ease-out;
-    }
+.quote-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  width: 600px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  display: none;
+  text-align: center;
+  font-size: 1.1em;
+  transition: opacity 0.5s ease;
+  z-index: 999;
+  animation: slideIn 0.5s ease-out;
+}
 
-    .quote-card.show {
-      display: block;
-    }
+.quote-card.show {
+  display: block;
+  opacity: 1;
+}
+
+.quote-card.hiding {
+  opacity: 0;
+}
+
 
     @keyframes slideIn {
       0% { transform: translate(-50%, -60%); opacity: 0; }
@@ -1114,6 +1120,124 @@ let blessingsOfDay = [
       enhancedTTS(randomPassage.text, true, document.getElementById('ttsLanguage').value);
       isGenerating = false;
     }
+
+    // Auto-hide timer variable to manage clearing if needed
+let autoHideTimer = null;
+
+// Display Quote with Auto-Hide
+function displayQuote(quote) {
+  const quoteCard = document.getElementById('quoteCard');
+  const quoteText = document.getElementById('quoteText');
+  const englishReading = document.getElementById('englishReading');
+  const quoteSource = document.getElementById('quoteSource');
+  const quoteImage = document.getElementById('quoteImage');
+
+  quoteText.innerHTML = `<span class="pali-text">${quote.text}</span>`;
+  englishReading.textContent = quote.englishReading || "";
+  quoteSource.textContent = `— ${quote.source}`;
+  quoteImage.src = templeImages[Math.floor(Math.random() * templeImages.length)];
+  quoteImage.alt = "Thai Temple";
+  quoteImage.style.display = "block";
+
+  document.body.className = quote.theme || "theme-wat-pra-kew";
+  quoteCard.style.display = 'block';
+  quoteCard.classList.remove('hiding');
+  setTimeout(() => {
+    quoteCard.classList.add('show');
+  }, 100);
+
+  // Auto-hide after 30 seconds
+  if (autoHideTimer) clearTimeout(autoHideTimer); // Clear any existing timer
+  autoHideTimer = setTimeout(() => {
+    quoteCard.classList.add('hiding');
+    setTimeout(() => {
+      quoteCard.classList.remove('show');
+      quoteCard.style.display = 'none';
+      quoteCard.classList.remove('hiding');
+    }, 500); // Matches the CSS transition duration
+  }, 30000); // 30 seconds
+}
+
+// Optionally clear auto-hide timer on user interaction (e.g., clicking any button in the card)
+function setupCardInteractions() {
+  const quoteCard = document.getElementById('quoteCard');
+  quoteCard.addEventListener('click', () => {
+    if (autoHideTimer) {
+      clearTimeout(autoHideTimer); // Stop auto-hide if user interacts with the card
+    }
+  });
+}
+
+// Update the initialization to include interaction listener
+window.addEventListener('DOMContentLoaded', () => {
+  updateBlessingOfDay();
+  document.getElementById('themeSelector').value = localStorage.getItem('selectedTheme') || 'theme-wat-pra-kew';
+  document.body.className = document.getElementById('themeSelector').value;
+
+  // Existing event listeners...
+  document.getElementById('themeSelector').addEventListener('change', (e) => {
+    document.body.className = e.target.value;
+    localStorage.setItem('selectedTheme', e.target.value);
+  });
+
+  document.getElementById('starButton').addEventListener('click', generatePassage);
+  document.getElementById('playBtn').addEventListener('click', () => {
+    if (currentQuote) enhancedTTS(currentQuote.text, true, document.getElementById('ttsLanguage').value);
+  });
+  document.getElementById('blessingBtn').addEventListener('click', () => {
+    if (currentQuote) {
+      createMandalaAnimation(document.body.className);
+      showNotification("🙏🏻 Blessing sent!");
+    }
+  });
+  document.getElementById('favoriteBtn').addEventListener('click', () => {
+    if (!currentQuote) return;
+    const isFavorited = favorites.some(fav => fav.id === currentQuote.id);
+    if (isFavorited) {
+      favorites = favorites.filter(fav => fav.id !== currentQuote.id);
+      showNotification('Removed from favorites');
+    } else {
+      favorites.push(currentQuote);
+      showNotification('Added to favorites! ❤️');
+    }
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  });
+  document.getElementById('shareBtn').addEventListener('click', () => {
+    if (!currentQuote) return;
+    const textToShare = currentQuote.text + "\n— " + currentQuote.source;
+    if (navigator.share) {
+      navigator.share({ text: textToShare }).catch(console.error);
+    } else {
+      showNotification("Share not supported. Copy and share manually.");
+    }
+  });
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    if (!currentQuote) return;
+    const textToCopy = currentQuote.text + "\n— " + currentQuote.source;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      showNotification("Blessing copied to clipboard! 📋");
+    });
+  });
+  document.getElementById('closeCard').addEventListener('click', closeQuoteCard);
+  document.getElementById('explanationToggle').addEventListener('click', toggleExplanation);
+
+  // Add interaction listener to prevent auto-hide on click
+  setupCardInteractions();
+
+  // Show initial explanation
+  toggleExplanation();
+
+  // Show welcome message
+  showNotification('🙏🏻 Welcome to Blessing of Siam! Click ☀️ to start 🙏🏻');
+
+  // Load voices early
+  if (window.speechSynthesis) {
+    window.speechSynthesis.onvoiceschanged = () => {
+      console.log("Voices loaded:", window.speechSynthesis.getVoices());
+    };
+    window.speechSynthesis.getVoices(); // Trigger voice loading
+  }
+});
 
     // Blessing of the Day
 function updateBlessingOfDay() {
