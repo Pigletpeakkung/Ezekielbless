@@ -17,6 +17,9 @@
       position: relative;
       min-height: 100vh;
       overflow: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     /* Pastel Themes */
@@ -126,76 +129,109 @@
       transform: translate(-50%, -50%);
       max-width: 90%;
       width: 600px;
-      padding: 20px;
+      padding: 25px;
       background: rgba(255, 255, 255, 0.95);
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       display: none;
       text-align: center;
       font-size: 1.1em;
       transition: all 0.5s ease;
       z-index: 999;
+      animation: slideIn 0.5s ease-out;
     }
 
     .quote-card.show {
       display: block;
     }
 
+    @keyframes slideIn {
+      0% { transform: translate(-50%, -60%); opacity: 0; }
+      100% { transform: translate(-50%, -50%); opacity: 1; }
+    }
+
     .pali-text {
       font-size: 1.2em;
       line-height: 1.6;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      color: #2c3e50;
     }
 
     .english-reading {
       font-size: 0.9em;
       color: #555;
       font-style: italic;
-      margin: 10px 0;
+      margin: 15px 0;
       opacity: 0.85;
+      line-height: 1.5;
     }
 
     .quote-source {
       font-size: 0.9em;
-      margin-top: 10px;
+      margin-top: 12px;
       color: #888;
     }
 
     .quote-image {
       margin: 20px 0;
       max-width: 100%;
+      height: auto;
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .quote-image:hover {
+      transform: scale(1.02);
     }
 
     .quote-actions {
-      margin-top: 15px;
+      margin-top: 20px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 8px;
-      flex-direction: column;
-      align-items: center;
+      gap: 10px;
     }
 
     .action-btn {
-      padding: 8px 16px;
-      border-radius: 20px;
+      padding: 10px 20px;
+      border-radius: 25px;
       font-size: 0.9em;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
       border: none;
-      margin-bottom: 8px;
+      background: #f7e7a0;
+      color: #333;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .action-btn:hover {
+      background: #edd279;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .action-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* Centered Sun Button (Generate Button) */
+    .generate-container {
+      position: fixed;
+      top: 80%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 997;
     }
 
     .generate-btn {
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       background: linear-gradient(135deg, #f7e7a0 0%, #edd279 100%);
       color: #333;
-      font-size: 2em;
+      font-size: 2.2em;
       border: none;
       cursor: pointer;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -203,12 +239,18 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 997;
+      animation: pulse 3s infinite ease-in-out;
     }
 
     .generate-btn:hover {
       transform: scale(1.1);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 5px 15px rgba(247, 231, 160, 0.3); }
+      50% { box-shadow: 0 5px 25px rgba(247, 231, 160, 0.6); }
+      100% { box-shadow: 0 5px 15px rgba(247, 231, 160, 0.3); }
     }
 
     .ko-fi-btn {
@@ -239,7 +281,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 250, 0.85);
+      background: rgba(255, 255, 255, 0.85);
       padding: 15px;
       text-align: center;
       font-size: 0.9em;
@@ -269,6 +311,7 @@
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       z-index: 999;
       display: none;
+      animation: fadeIn 0.5s ease-out;
     }
 
     .blessing-of-day.show {
@@ -281,10 +324,15 @@
       font-weight: bold;
     }
 
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
     /* Explanation Section */
     .blessing-explanation {
       position: fixed;
-      bottom: 150px;
+      bottom: 100px;
       left: 50%;
       transform: translateX(-50%);
       max-width: 90%;
@@ -329,18 +377,48 @@
       justify-content: center;
       gap: 10px;
       z-index: 998;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
     }
 
     .theme-selector, .source-filter {
-      padding: 8px;
+      padding: 10px;
       border-radius: 10px;
       border: 1px solid #ddd;
       font-size: 0.9em;
       min-width: 150px;
       background-color: rgba(255, 255, 255, 0.9);
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .theme-selector:hover, .source-filter:hover {
+      border-color: #f7e7a0;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      display: none;
+      font-size: 0.9em;
+      color: #333;
+      animation: fadeInOut 3s ease-in-out forwards;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translate(-50%, 20px); }
+      10% { opacity: 1; transform: translate(-50%, 0); }
+      90% { opacity: 1; transform: translate(-50%, 0); }
+      100% { opacity: 0; transform: translate(-50%, 20px); }
     }
 
     /* Mobile Adjustments */
@@ -348,23 +426,49 @@
       .controls {
         flex-direction: column;
         justify-content: center;
+        gap: 8px;
       }
 
       .theme-selector, .source-filter {
-        width: 100%;
+        width: 90%;
+        min-width: auto;
       }
 
       .generate-container {
-        bottom: 30px;
+        top: 75%;
       }
 
       .ko-fi-btn {
         right: 10px;
+        top: 10px;
+        font-size: 0.8em;
+        padding: 8px 12px;
       }
 
       .blessing-explanation {
-        bottom: 120px;
+        bottom: 80px;
         width: 90%;
+        font-size: 0.8em;
+        padding: 10px;
+      }
+
+      .quote-card {
+        width: 95%;
+        padding: 15px;
+        font-size: 1em;
+      }
+
+      .pali-text {
+        font-size: 1.1em;
+      }
+
+      .english-reading {
+        font-size: 0.85em;
+      }
+
+      .action-btn {
+        padding: 8px 16px;
+        font-size: 0.8em;
       }
 
       .mandala {
@@ -375,7 +479,7 @@
 </head>
 <body>
   <!-- Ko-Fi Support Button -->
-  <a href="https://ko-fi.com/yourusername" class="ko-fi-btn" target="_blank" aria-label="Support the creator on Ko-Fi">☕ Support Me</a>
+  <a href="https://linktr.ee/ThanttEzekiel" class="ko-fi-btn" target="_blank" aria-label="Support the creator">☕ Support Me</a>
 
   <!-- Controls -->
   <div class="controls">
@@ -408,7 +512,7 @@
     <div class="english-reading" id="blessingOfDayEnglish">Blessing of the Day: "อมตสุขมีอยู่ในใจ" (Eternal happiness lies in the heart)</div>
   </div>
 
-  <!-- Generate Button -->
+  <!-- Generate Button (Sun Button Centered) -->
   <div class="generate-container" role="button" tabindex="0" aria-label="Generate a new blessing">
     <button class="generate-btn" id="starButton" aria-label="Generate a new blessing">☀️</button>
   </div>
@@ -449,7 +553,7 @@
 
   <!-- Creator Section -->
   <div class="creator-section" id="creatorSection">
-    <p>Created by <a href="https://ko-fi.com/yourusername" target="_blank">Your Name</a> 🙏 | 
+    <p>Created by <a href="https://pigletpeakkung.github.io/Thannxai/" target="_blank">Thanatsitt Santisamranwilai</a> 🙏 | 
     <a href="https://unsplash.com" target="_blank">Images from Unsplash</a></p>
   </div>
 
@@ -458,6 +562,91 @@
   <div class="notification" id="notification"></div>
 
   <script>
+    // Random Thai Temple Images (with fallback)
+    const templeImages = [
+      "https://images.unsplash.com/photo-1600703050964-1d6327353db7?auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1584459443767-905a40096dbd?auto=format&fit=crop&w=800&q=60",
+      "https://images.unsplash.com/photo-1611974589080-f69b6a693652?auto=format&fit=crop&w=800&q=60",
+      "https://via.placeholder.com/600x400?text=Thai+Temple+Image"
+    ];
+
+    // Daily Blessings
+let blessingsOfDay = [
+  {
+    id: 654,
+    thai: "จงใช้ชีวิตในปัจจุบันอย่างมีสติและปัญญา",
+    english: "Live in the present moment wisely.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 655,
+    thai: "วิปัสสนาหมายถึง 'การมองเห็นสิ่งต่างๆ ตามความเป็นจริง' ไม่ใช่ตามที่มันดูเหมือนจะเป็น",
+    english: "Vipassana means 'to see things as they really are', not as they appear to be.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 656,
+    thai: "ทุกความรู้สึกเกิดขึ้นเพื่อดับไป ไม่มีสิ่งใดถาวร นี่คือกฎแห่งอนิจจัง",
+    english: "Every sensation arises to pass away. Nothing is eternal. This is the law of impermanence.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 657,
+    thai: "รากเหง้าของความทุกข์คือความอยากและความเกลียดชัง กำจัดมันเสีย และคุณจะกำจัดความทุกข์ได้",
+    english: "The root of suffering is craving and aversion. Eradicate them, and you eradicate suffering.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 658,
+    thai: "ทำงานอย่างขยันหมั่นเพียร ทำงานอย่างอดทน ทำงานอย่างต่อเนื่อง คุณจะต้องประสบความสำเร็จแน่นอน",
+    english: "Work diligently. Work patiently. Work persistently. You are bound to be successful.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 659,
+    thai: "ธรรมะไม่ใช่ปรัชญา ธรรมะเป็นวิธีปฏิบัติเพื่อใช้ชีวิตอย่างมีความสุข",
+    english: "Dhamma is not a philosophy. Dhamma is a practical way of living a happy life.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 660,
+    thai: "เมื่อคุณนั่งสมาธิ อย่าคาดหวังอะไร อย่าปรารถนาอะไร อย่าปฏิเสธอะไร",
+    english: "When you meditate, don't expect anything, don't crave for anything, don't reject anything.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 661,
+    thai: "จักรวาลทั้งหมดเป็นเพียงการสั่นสะเทือน เกิดขึ้นและดับไป",
+    english: "The entire universe is nothing but vibration, arising and passing.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 662,
+    thai: "ลมหายใจของคุณคือสะพานเชื่อมระหว่างจิตสำนึกและจิตไร้สำนึก",
+    english: "Your breath is the bridge between the conscious and unconscious mind.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 663,
+    thai: "การหลุดพ้นเป็นไปได้ที่นี่และเดี๋ยวนี้ ไม่ใช่ในสวรรค์ที่จินตนาการขึ้น",
+    english: "Liberation is possible here and now, not in some imaginary heaven.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 664,
+    thai: "จิตที่บริสุทธิ์เต็มไปด้วยความรัก—ความรักต่อทุกสรรพสิ่งโดยไม่เลือกปฏิบัติ",
+    english: "A pure mind is full of love—love for all beings without discrimination.",
+    source: "S.N. Goenka"
+  },
+  {
+    id: 665,
+    thai: "จิตใจเหมือนเด็กที่ถูกตามใจ—ยิ่งคุณตามใจมันมากเท่าไหร่ มันยิ่งเรียกร้องมากขึ้นเท่านั้น",
+    english: "The mind is like a spoiled child—the more you pamper it, the more it demands.",
+    source: "S.N. Goenka"
+  }
+];
+
+
     // Passages with complete English translations
     const passages = [
       {
@@ -476,7 +665,7 @@
       },
       {
         id: 3,
-        text: "พุทธัง ชีวิตัง ยาวะ นิพพานัง สะระณัง คัจฉามิ\nอิติปิ โส ภะคะวา อะระหัง สัมมาสัมพุทโธ\nวิชชาจะระณะสัมปันโน สุคะโต โลกะวิทู อะนุตตะโร\nปูริสะทัมมะสาระถิ สัตถา เทวะมะนุสสานัง พุทโธ ภะคะวาติ สะวากขาโต ภะคะวะตา ธัมโม สันทิฏฐิโก อะกาลิโก เอหิปัสสิโก โอปะนะยิโก ปัจจัตตัง เวทิตัพโพ วิญญูหิติ",
+        text: "พุทธัง ชีวิตัง ยาวะ นิพพานัง สะระณัง คัจฉามิ\nอิติปิ โส ภะคะวา อะระหัง สัมมาสัมพุทโธ\nวิชชาจะระณะสัมปันโน สุคะโต โลกะวิทู อะนุตตะโร\nปูริสะทัมมสาระถิ สัตถา เทวะมะนุสสานัง พุทโธ ภะคะวาติ สะวากขาโต ภะคะวะตา ธัมโม สันทิฏฐิโก อะกาลิโก เอหิปัสสิโก โอปะนะยิโก ปัจจัตตัง เวทิตัพโพ วิญญูหิติ",
         englishReading: "I go for refuge to the Buddha, the living one, until Nibbana.\nSuch is the Buddha, the Arahant, the Fully Enlightened One,\nEndowed with knowledge and vision, the Worthy One, the Knower of the world,\nUnsurpassed, the Teacher of devas and humans, the Buddha, the Exalted One.\nThe Dhamma taught by the Buddha is to be seen here and now, timeless, inviting, leading to realization, and understood by the wise.",
         source: "Buddhism",
         theme: "theme-wat-benchamabophit"
@@ -490,7 +679,7 @@
       },
       {
         id: 5,
-        text: "สังฆัง ชีวิตัง ยาวะ นิพพานัง สะระณัง คัจฉามิ\nสุปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nอุชุปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nญายะปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nสามีจิปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nยะทิทัง จัตตาริ ปุริสะยุคานิ อัฏฐะ ปุริสะปุคคะลา\nเอสะ ภะคะวะโต สาวะกะสังโฆ\nอาหุเนยโย ปาหุเนยโย ทักขิเนยโย อัญชะลีกะระณีโย\nอะนุตตะรัง ปุญญักเขตตัง โลกัสสาติ",
+        text: "สังฆัง ชีวิตัง ยาวะ นิพพานัง สะระณัง คัจฉามิ\nสุปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nอุชุปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nญายะปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nสามีจิปะฏิปันโน ภะคะวะโต สาวะกะสังโฆ\nยะทิทัง จัตตาริ ปุริสะยุคานิ อัฏฐะ ปุริสะปุคคะลา\nเอสะ ภะคะวะโต สาวะกะสังโฆ\nอาหุเนยโย ปาหุเนยโย ทักขิเนยโย อัญชะลีกะระणีโย\nอะนุตตะรัง ปุญญักเขตตัง โลกัสสาติ",
         englishReading: "I go for refuge to the Sangha, the living one, until Nibbana.\nThe well-taught Sangha, the well-disciplined Sangha, the ardent Sangha, the wise Sangha, the noble Sangha of the Buddha.\nThey rightly understand the four foundations of mindfulness, eightfold path, and eight great qualities. This is the noble Sangha of the Buddha, worthy to be given alms, honored, and respected as an unsurpassed blessing to the world.",
         source: "Buddhism",
         theme: "theme-wat-arun"
@@ -596,11 +785,11 @@
       {
         id: 20,
         text: "อิติปิโส ภะคะวา อะระหัง สัมมาสัมพุทโธ วิชชาจะระณะสัมปันโน สุคะโต โลกะวิทู อะนุตตะโร ปุริสะทัมมะสาระถิ สัตถา เทวะมะนุสสานัง พุทโธ ภะคะวาติ สะวากขาโต ภะคะวะตา ธัมโม สันทิฏฐิโก อะกาลิโก เอหิปัสสิโก โอปะนะยิโก ปัจจัตตัง เวทิตัพโพ วิญญูหิติ",
-        englishReading: "Itipiso bhakawa arahan samma samphuto, Viccha jarana sampanno sukka to logavitu anutaro purisadhamma sarathi satha dhewa manusanan bhuto bhagawa ti",
+        englishReading: "Itipiso bhagavā arahā samma sambuddho vijjācaraṇasampanno sukhito lokavitu anuttaro purisadammasarathi satthā devamanussānaṃ buddho bhagavāti savaṅkhato bhagavatā dhammo santikiko ākāliko ehipassiko opaṇīyiko paccattaṃ vetithabbo viññūhiti.",
         source: "Buddhism",
-        theme: "theme-wat-traimit"
+        theme: "theme-wat-pra-kew"
       },
-            {
+      {
         id: 21,
         text: "อิทธิมันตัง นะมามิหัง",
         englishReading: "I bow to the Buddha, the One of Great Power.",
@@ -713,7 +902,7 @@
         theme: "theme-wat-benchamabophit"
       },
       {
-        id: 37,
+                id: 37,
         text: "เอสะ ภะคะวะโต สาวะกะสังโฆ",
         englishReading: "This is the noble Sangha of the Buddha.",
         source: "Buddhism",
@@ -741,7 +930,26 @@
         theme: "theme-wat-phra-singh"
       }
     ];
-          // Validate all IDs are unique at app start
+
+    let usedPassages = [];
+    let favorites = [];
+    let quotesRead = 0;
+    let currentQuote = null;
+    let isGenerating = false;
+
+    // Validate localStorage
+    try {
+      usedPassages = JSON.parse(localStorage.getItem('usedPassages')) || [];
+      favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      quotesRead = parseInt(localStorage.getItem('quotesRead')) || 0;
+    } catch (e) {
+      showNotification("Failed to load saved data. Resetting...");
+      usedPassages = [];
+      favorites = [];
+      quotesRead = 0;
+    }
+
+    // Validate all IDs are unique at app start
     if (new Set(passages.map(p => p.id)).size !== passages.length) {
       showNotification("Error: Duplicate passage IDs found. Resetting...");
       usedPassages = [];
@@ -771,6 +979,31 @@
       setTimeout(() => {
         mandala.classList.remove('show');
       }, 5000);
+    }
+
+    // Show Notification
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.style.display = 'block';
+    }
+
+    // Show TTS Status
+    function showTTSStatus(message, type = 'speaking') {
+      const statusEl = document.getElementById('ttsStatus');
+      statusEl.textContent = message;
+      statusEl.style.display = 'block';
+
+      if (type === 'error') {
+        setTimeout(() => {
+          statusEl.style.display = 'none';
+        }, 3000);
+      }
+    }
+
+    function hideTTSStatus() {
+      const statusEl = document.getElementById('ttsStatus');
+      statusEl.style.display = 'none';
     }
 
     // Enhanced TTS with male voice
@@ -883,21 +1116,22 @@
     }
 
     // Blessing of the Day
-    function updateBlessingOfDay() {
-      const today = new Date().toISOString().split('T')[0];
-      const lastBlessing = localStorage.getItem('lastBlessingOfDay');
-      const blessingOfDayEl = document.getElementById('blessingOfDay');
-      const blessingOfDayText = document.getElementById('blessingOfDayText');
-      const blessingOfDayEnglish = document.getElementById('blessingOfDayEnglish');
+function updateBlessingOfDay() {
+  const today = new Date().toISOString().split('T')[0];
+  const lastBlessing = localStorage.getItem('lastBlessingOfDay');
+  const blessingOfDayEl = document.getElementById('blessingOfDay');
+  const blessingOfDayText = document.getElementById('blessingOfDayText');
+  const blessingOfDayEnglish = document.getElementById('blessingOfDayEnglish');
 
-      if (!lastBlessing || lastBlessing !== today) {
-        const randomBlessing = blessingsOfDay[Math.floor(Math.random() * blessingsOfDay.length)];
-        blessingOfDayText.textContent = "Blessing of the Day: " + randomBlessing;
-        blessingOfDayEnglish.textContent = "Blessing of the Day: " + randomBlessing;
-        localStorage.setItem('lastBlessingOfDay', today);
-        blessingOfDayEl.classList.add('show');
-      }
-    }
+  if (!lastBlessing || lastBlessing !== today) {
+    const randomBlessing = blessingsOfDay[Math.floor(Math.random() * blessingsOfDay.length)];
+    blessingOfDayText.textContent = `Blessing of the Day: "${randomBlessing.thai}"`;
+    blessingOfDayEnglish.textContent = `(${randomBlessing.english}) — ${randomBlessing.source}`;
+    localStorage.setItem('lastBlessingOfDay', today);
+    blessingOfDayEl.classList.add('show');
+  }
+}
+
 
     // Initialize App
     window.addEventListener('DOMContentLoaded', () => {
@@ -915,8 +1149,112 @@
         if (currentQuote) enhancedTTS(currentQuote.text, true, document.getElementById('ttsLanguage').value);
       });
       document.getElementById('blessingBtn').addEventListener('click', () => {
-        if (currentQuote) createMandalaAnimation(document.body.className);
+        if (currentQuote) {
+          createMandalaAnimation(document.body.className);
+          showNotification("🙏🏻 Blessing sent!");
+        }
       });
+      
+  // Random Thai Temple Images (with fallback)
+  const templeImages = [
+    "https://images.unsplash.com/photo-1600703050964-1d6327353db7?auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1584459443767-905a40096dbd?auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1611974589080-f69b6a693652?auto=format&fit=crop&w=800&q=60",
+    "https://via.placeholder.com/600x400?text=Thai+Temple+Image"
+  ];
+
+  // Daily Blessings
+  let blessingsOfDay = [
+    {
+      id: 654,
+      thai: "จงใช้ชีวิตในปัจจุบันอย่างมีสติและปัญญา",
+      english: "Live in the present moment wisely.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 655,
+      thai: "วิปัสสนาหมายถึง 'การมองเห็นสิ่งต่างๆ ตามความเป็นจริง' ไม่ใช่ตามที่มันดูเหมือนจะเป็น",
+      english: "Vipassana means 'to see things as they really are', not as they appear to be.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 656,
+      thai: "ทุกความรู้สึกเกิดขึ้นเพื่อดับไป ไม่มีสิ่งใดถาวร นี่คือกฎแห่งอนิจจัง",
+      english: "Every sensation arises to pass away. Nothing is eternal. This is the law of impermanence.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 657,
+      thai: "รากเหง้าของความทุกข์คือความอยากและความเกลียดชัง กำจัดมันเสีย และคุณจะกำจัดความทุกข์ได้",
+      english: "The root of suffering is craving and aversion. Eradicate them, and you eradicate suffering.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 658,
+      thai: "ทำงานอย่างขยันหมั่นเพียร ทำงานอย่างอดทน ทำงานอย่างต่อเนื่อง คุณจะต้องประสบความสำเร็จแน่นอน",
+      english: "Work diligently. Work patiently. Work persistently. You are bound to be successful.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 659,
+      thai: "ธรรมะไม่ใช่ปรัชญา ธรรมะเป็นวิธีปฏิบัติเพื่อใช้ชีวิตอย่างมีความสุข",
+      english: "Dhamma is not a philosophy. Dhamma is a practical way of living a happy life.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 660,
+      thai: "เมื่อคุณนั่งสมาธิ อย่าคาดหวังอะไร อย่าปรารถนาอะไร อย่าปฏิเสธอะไร",
+      english: "When you meditate, don't expect anything, don't crave for anything, don't reject anything.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 661,
+      thai: "จักรวาลทั้งหมดเป็นเพียงการสั่นสะเทือน เกิดขึ้นและดับไป",
+      english: "The entire universe is nothing but vibration, arising and passing.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 662,
+      thai: "ลมหายใจของคุณคือสะพานเชื่อมระหว่างจิตสำนึกและจิตไร้สำนึก",
+      english: "Your breath is the bridge between the conscious and unconscious mind.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 663,
+      thai: "การหลุดพ้นเป็นไปได้ที่นี่และเดี๋ยวนี้ ไม่ใช่ในสวรรค์ที่จินตนาการขึ้น",
+      english: "Liberation is possible here and now, not in some imaginary heaven.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 664,
+      thai: "จิตที่บริสุทธิ์เต็มไปด้วยความรัก—ความรักต่อทุกสรรพสิ่งโดยไม่เลือกปฏิบัติ",
+      english: "A pure mind is full of love—love for all beings without discrimination.",
+      source: "S.N. Goenka"
+    },
+    {
+      id: 665,
+      thai: "จิตใจเหมือนเด็กที่ถูกตามใจ—ยิ่งคุณตามใจมันมากเท่าไหร่ มันยิ่งเรียกร้องมากขึ้นเท่านั้น",
+      english: "The mind is like a spoiled child—the more you pamper it, the more it demands.",
+      source: "S.N. Goenka"
+    }
+  ];
+
+  // Blessing of the Day
+  function updateBlessingOfDay() {
+    const today = new Date().toISOString().split('T')[0];
+    const lastBlessing = localStorage.getItem('lastBlessingOfDay');
+    const blessingOfDayEl = document.getElementById('blessingOfDay');
+    const blessingOfDayText = document.getElementById('blessingOfDayText');
+    const blessingOfDayEnglish = document.getElementById('blessingOfDayEnglish');
+
+    if (!lastBlessing || lastBlessing !== today) {
+      const randomBlessing = blessingsOfDay[Math.floor(Math.random() * blessingsOfDay.length)];
+      blessingOfDayText.textContent = `Blessing of the Day: "${randomBlessing.thai}"`;
+      blessingOfDayEnglish.textContent = `(${randomBlessing.english}) — ${randomBlessing.source}`;
+      localStorage.setItem('lastBlessingOfDay', today);
+      blessingOfDayEl.classList.add('show');
+    }
+  }
       document.getElementById('favoriteBtn').addEventListener('click', () => {
         if (!currentQuote) return;
         const isFavorited = favorites.some(fav => fav.id === currentQuote.id);
@@ -935,7 +1273,7 @@
         if (navigator.share) {
           navigator.share({ text: textToShare }).catch(console.error);
         } else {
-          alert("Share not supported. Copy and share manually.");
+          showNotification("Share not supported. Copy and share manually.");
         }
       });
       document.getElementById('copyBtn').addEventListener('click', () => {
