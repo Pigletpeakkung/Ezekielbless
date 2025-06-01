@@ -505,9 +505,10 @@
 }
 
 /* Generate Button - Adjusted */
+/* Generate Button - MOVED UP MORE */
 .generate-container {
   position: fixed;
-  top: 70%; /* Moved up slightly */
+  top: 55%; /* Changed from 70% to 55% */
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 997;
@@ -515,11 +516,38 @@
 
 /* Mobile Adjustments - UPDATED */
 @media (max-width: 600px) {
-  .creator-section {
-    font-size: 0.7em;
-    padding: 5px 10px;
-    height: 30px;
+  .generate-container {
+    top: 50%; /* Changed from 65% to 50% on mobile */
   }
+  
+  /* Make button slightly smaller on mobile for better fit */
+  .generate-btn {
+    width: 65px; /* Reduced from 70px */
+    height: 65px; /* Reduced from 70px */
+    font-size: 2em; /* Reduced from 2.2em */
+  }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+  .generate-container {
+    top: 45%; /* Even higher on very small screens */
+  }
+  
+  .generate-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.8em;
+  }
+}
+
+/* Alternative positioning if you want it even higher */
+@media (orientation: landscape) and (max-height: 500px) {
+  .generate-container {
+    top: 40%; /* Higher on landscape mode */
+  }
+}
+
 
   .stats-counter {
     bottom: 40px; /* Adjusted for mobile */
