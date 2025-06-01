@@ -1012,42 +1012,77 @@ let blessingsOfDay = [
       statusEl.style.display = 'none';
     }
 
-    // Enhanced TTS with male voice
-    function enhancedTTS(text, autoPlay = false, lang = 'th-TH') {
-      if (!window.speechSynthesis) {
-        showTTSStatus('TTS not supported', 'error');
-        return null;
-      }
+let ttsDisabled = false;
 
-      window.speechSynthesis.cancel();
+function enhancedTTS(text, autoPlay = false, lang = 'th-TH') {
+  if (ttsDisabled) {
+    showTTSStatus("TTS is disabled due to earlier error.", 'error');
+    return null;
+  }
+  if (!window.speechSynthesis) {
+    showTTSStatus('TTS not supported. Please use a modern browser like Chrome.', 'error');
+    ttsDisabled = true;
+    return null;
+  }
 
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = lang;
-      utterance.rate = 1.4;
-      utterance.pitch = 0.9;
-      utterance.volume = 1.0;
+  window.speechSynthesis.cancel();
 
-      const maleVoice = window.speechSynthesis.getVoices().find(v => v.lang === lang && v.name.toLowerCase().includes('male'));
-      if (maleVoice) {
-        utterance.voice = maleVoice;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = lang;
+  utterance.rate = 1.4;
+  utterance.pitch = 0.9;
+  utterance.volume = 1.0;
+
+  // Function to set voice with retry if voices aren't loaded
+  function setVoice(attempts = 0) {
+    const voices = window.speechSynthesis.getVoices();
+    if (voices.length === 0 && attempts < 10) {
+      showTTSStatus("Loading voices, please wait...", 'speaking');
+      setTimeout(() => setVoice(attempts + 1), 500); // Retry after 500ms
+      return false;
+    } else if (voices.length === 0) {
+      showTTSStatus("No voices loaded. TTS unavailable.", 'error');
+      ttsDisabled = true;
+      return false;
+    }
+
+    const langPrefix = lang.split('-')[0];
+    const maleVoice = voices.find(v => v.lang.includes(langPrefix) && v.name.toLowerCase().includes('male'));
+    if (maleVoice) {
+      utterance.voice = maleVoice;
+    } else {
+      const defaultVoice = voices.find(v => v.lang.includes(langPrefix));
+      if (defaultVoice) {
+        utterance.voice = defaultVoice;
       } else {
-        const defaultVoice = window.speechSynthesis.getVoices().find(v => v.lang === lang);
-        if (defaultVoice) {
-          utterance.voice = defaultVoice;
+        const anyVoice = voices[0]; // Fallback to any voice
+        if (anyVoice) {
+          utterance.voice = anyVoice;
+          showTTSStatus(`Using fallback voice (not ${lang === 'th-TH' ? 'Thai' : 'English'})`, 'speaking');
         } else {
-          showTTSStatus("No suitable voice found", "error");
-          return null;
+          showTTSStatus("No suitable voice found for " + (lang === 'th-TH' ? 'Thai' : 'English') + ". Ensure your device/browser supports this language.", 'error');
+          ttsDisabled = true;
+          return false;
         }
       }
-
-      showTTSStatus(`🔊 Speaking in ${lang === 'th-TH' ? 'Pali (Thai)' : 'English'}...`, 'speaking');
-      if (autoPlay) window.speechSynthesis.speak(utterance);
-
-      utterance.onend = () => hideTTSStatus();
-      utterance.onerror = (e) => showTTSStatus(`Voice error: ${e.error}`, 'error');
-
-      return utterance;
     }
+    return true;
+  }
+
+  if (setVoice()) {
+    showTTSStatus(`🔊 Speaking in ${lang === 'th-TH' ? 'Pali (Thai)' : 'English'}...`, 'speaking');
+    if (autoPlay) window.speechSynthesis.speak(utterance);
+  }
+
+  utterance.onend = () => hideTTSStatus();
+  utterance.onerror = (e) => {
+    showTTSStatus(`Voice error: ${e.error}`, 'error');
+    ttsDisabled = true;
+  };
+
+  return utterance;
+}
+
 
     // Display Quote
     function displayQuote(quote) {
