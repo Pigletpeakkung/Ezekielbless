@@ -1,11 +1,11 @@
 {
   "name": "Blessing of Siam",
-  "description": "A spiritual and meditative web app with Thai Buddhist passages, mandala animations, and TTS.",
+  "description": "A spiritual and meditative web app with Thai Buddhist passages, mandala animations, and TTS by Thanatsitt Santisamranwilai",
   "version": "1.0.0",
-  "author": "Your Name",
+  "author": "Thanatsitt Santisamranwilai",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/blessing-of-siam.git"
+    "url": "https://github.com/Pigletpeakkung/blessing-of-siam.git"
   },
   "keywords": [
     "buddhism",
@@ -15,13 +15,15 @@
     "tts",
     "spiritual",
     "meditation",
-    "web-app"
+    "web-app",
+    "multilingual",
+    "ai-generated"
   ],
   "license": "MIT",
   "main": "index.html",
   "scripts": {
     "start": "open index.html",
-    "deploy": "echo 'Deploy instructions here'"
+    "deploy": "echo 'Deploy to GitHub Pages or Netlify'"
   },
   "dependencies": {},
   "devDependencies": {}
